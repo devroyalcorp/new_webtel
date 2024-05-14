@@ -9,8 +9,8 @@
         margin:auto;
         justify-content: center;
         align-items: center;
-        width: 300px;
-        height: 300px;
+        width: 200px;
+        height: 200px;
         background-color: red;
         border-radius: 50%;
         color: white;
@@ -38,19 +38,37 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-evenly" style="margin-top:10px">
-            <div class="col" style="margin-top:10px">
+            <div class="col-md-3" style="margin-top:10px">
                 <div class="circle">
-                    <a href="{{route('webmail.index')}}" class="link_circle" style="color:white;">
-                        <i class="fa fa-envelope icon_center"><br>Webmail</i>
+                    <a href="#" class="link_circle" style="color:white;">
+                        <i class="fa fa-envelope icon_center"></i>
                     </a>
                 </div>
+                <p class="text-center">PT ROYAL ABADI SEJAHTERA</p>
             </div>
-            <div class="col" style="margin-top:10px">
+            <div class="col-md-3" style="margin-top:10px">
                 <div class="circle">
-                    <a href="{{route('webtel.index')}}" class="link_circle" style="color:white;">
-                        <i class="fa fa-phone icon_center"><br>Webtel</i>
+                    <a href="#" class="link_circle" style="color:white;">
+                        <i class="fa fa-envelope icon_center"></i>
                     </a>
                 </div>
+                <p class="text-center">PT BESTARI MULIA</p>
+            </div>
+            <div class="col-md-3" style="margin-top:10px">
+                <div class="circle">
+                    <a href="#" class="link_circle" style="color:white;">
+                        <i class="fa fa-envelope icon_center"></i>
+                    </a>
+                </div>
+                <p class="text-center">PT CEMERLANG ABADI MULIA</p>
+            </div>
+            <div class="col-md-3" style="margin-top:10px">
+                <div class="circle">
+                    <a href="#" class="link_circle" style="color:white;">
+                        <i class="fa fa-envelope icon_center"></i>
+                    </a>
+                </div>
+                <p class="text-center">PT ANUGRAH CEMERLANG ABADI</p>
             </div>
         </div>
     </div>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\WebmailController;
+use App\Http\Controllers\WebtelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/webmail', [WebmailController::class, 'index'])->name('webmail.index');
+Route::get('/webtel', [WebtelController::class, 'index'])->name('webtel.index');
+

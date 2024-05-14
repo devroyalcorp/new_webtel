@@ -8,7 +8,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $tittle = "Home";
-        return view('home', compact('tittle'));
+        return view('home');
     }
 }
