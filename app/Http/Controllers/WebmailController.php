@@ -8,33 +8,64 @@ use App\Models\Departments;
 use App\Models\Employees;
 use App\Models\JobDetails;
 use App\Models\User;
+use Yajra\DataTables\Facades\DataTables;
 class WebmailController extends Controller
 {
     public function index()
     {
         $data_companies = Companies::get();
-        // dd($data_companies);
+        
         return view('webmail.index',compact('data_companies'));
     }
 
-    public function create(){
-
-    }
-
-    public function update($id){
-        
-    }
-
-    public function detail_webmail($id){
-        $data_companies= JobDetails::select('job_details.work_email','employees.first_name','departments.name','companies.acronym')
+    public function datatables_webmail($id)
+    {
+        $data_companies= JobDetails::select('job_details.employee_id','job_details.work_email','employees.first_name','departments.name','companies.acronym')
         ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
         ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
         ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
         ->where('job_details.company_id',$id)
         ->get();
 
-        // dd($data_companies);
-        return view('webmail.detail',compact('data_companies'));
+        return DataTables::of($data_companies)
+        ->addIndexColumn()
+        ->make(true);
+    }
+
+
+    public function create(){
+
+    }
+
+    public function get_employee_webmail($id){
+        $data = JobDetails::where('employee_id',$id)->first();
+
+        if($data){
+            return response()->json(['status' => 202, 'msg' => "Data has been !", 'title' => 'Berhasil!', 'type' => 'success', 'data' => $data]);
+        }else{
+            return response()->json(['status' => 500, 'msg' => "There is no data!", 'title' => 'Gagal!', 'type' => 'error']);
+        }
+    }
+
+    public function update(Request $request){
+        $data = $request->all();
+        $updated_jobdetails = JobDetails::where('employee_id',$data['employee_id'])->first();
+        
+        $updated_jobdetails->work_email = $data['email'];
+        $updated_jobdetails->update();
+
+        if($updated_jobdetails){
+            return response()->json(['status' => 202, 'msg' => "Update succesfull!", 'title' => 'Berhasil!', 'type' => 'success']);
+        }else{
+            return response()->json(['status' => 500, 'msg' => "Update Failed!", 'title' => 'Gagal!', 'type' => 'error']);
+        }
+    }
+
+    public function detail_webmail($id){
+
+        $id_company = $id;
+
+        return view('webmail.detail',compact('id_company'));
     }
 
     public function delete(){

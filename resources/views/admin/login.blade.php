@@ -72,13 +72,13 @@
                     contentType: false,
                     dataType: 'json',
                     beforeSend: function () {
-                        loading()
+                        // loading()
                     },
                     success: function (response) {
-                        loadingDone()
+                        // loadingDone()
                         if (response.status == 202) {
                             toastr.success(response.msg, response.title)
-                            // location.reload();  
+                            location.href = '/' 
                         } else {
                             toastr.error(response.msg, response.title)
                         }

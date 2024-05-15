@@ -7,8 +7,13 @@
         <a class="navbar-brand" href="{{route('home')}}"">Webtel & Webmail</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>
-                Login</a>
+            @if(!Session::get('login_status'))
+              <a class="nav-link" href="{{route('admin.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                  Login</a>
+            @else
+              <a class="nav-link" href="{{route('admin.logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                Logout</a>
+            @endif
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-book" aria-hidden="true"></i>Docs</a>
