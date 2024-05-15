@@ -7,7 +7,7 @@
         <a class="navbar-brand" href="{{route('home')}}"">Webtel & Webmail</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>
+            <a class="nav-link" href="{{route('admin.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>
                 Login</a>
           </li>
           <li class="nav-item">

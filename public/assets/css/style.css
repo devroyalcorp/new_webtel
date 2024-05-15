@@ -1,0 +1,27 @@
+
+.circle {
+    display: flex;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    position: relative;
+}
+
+.icon_center {
+    font-size: 48px;
+    text-align: center;
+}
+
+.link_circle{
+    color:white;
+}
+
+.link_circle:hover{
+    color:blueviolet;
+}
