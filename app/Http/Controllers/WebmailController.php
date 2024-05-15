@@ -13,7 +13,7 @@ class WebmailController extends Controller
 {
     public function index()
     {
-        $data_companies = Companies::get();
+        $data_companies = Companies::orderBy('id','asc')->get();
         
         return view('webmail.index',compact('data_companies'));
     }
@@ -64,8 +64,8 @@ class WebmailController extends Controller
     public function detail_webmail($id){
 
         $id_company = $id;
-
-        return view('webmail.detail',compact('id_company'));
+        $data_companies = Companies::find($id_company);
+        return view('webmail.detail',compact('data_companies','id_company'));
     }
 
     public function delete(){

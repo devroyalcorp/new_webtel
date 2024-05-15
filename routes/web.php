@@ -43,9 +43,4 @@ Route::get('/login', [UserController::class, 'index'])->name('admin.login');
 Route::post('/login/checked', [UserController::class, 'login'])->name('admin.logincheck');
 Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
-//agenda perkara
-// Route::post('/perkara/create_agenda_perkara', 'AgendaPerkaraController@create_agenda_perkara')->name('agenda_perkara.create');
-// Route::get('/perkara/get_agenda_perkara/{id}', 'AgendaPerkaraController@get_agenda_perkara')->name('agenda_perkara.get_data');
-// Route::post('/perkara/update_agenda_perkara', 'AgendaPerkaraController@update_agenda_perkara')->name('agenda_perkara.update');
-// Route::post('/perkara/delete_agenda_perkara', 'AgendaPerkaraController@delete_agenda_perkara')->name('agenda_perkara.delete');
 

@@ -13,7 +13,7 @@ class WebtelController extends Controller
 {
     public function index()
     {
-        $data_companies = Companies::get();
+        $data_companies = Companies::orderBy('id','asc')->get();
         
         return view('webtel.index',compact('data_companies'));
     }
@@ -64,8 +64,8 @@ class WebtelController extends Controller
 
     public function detail_webtel($id){
         $id_company = $id;
-
-        return view('webtel.detail',compact('id_company'));
+        $data_companies = Companies::find($id_company);
+        return view('webmail.detail',compact('data_companies','id_company'));
     }
 
     public function delete(){

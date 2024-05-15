@@ -35,13 +35,19 @@
           align-items: center;
           width: 300px;
           height: 300px;
-          background-color: red;
           border-radius: 50%;
           color: white;
           font-size: 24px;
           position: relative;
       }
-    
+
+      .c_webmail {
+        background-color: #6495ED;
+      }
+
+      .c_webtel {
+        background-color: #8B0000;
+      }
       .icon_center {
           font-size: 48px;
           text-align: center;

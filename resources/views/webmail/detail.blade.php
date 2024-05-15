@@ -8,7 +8,12 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top:15px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page" style="font-size:30px;"><b>{{$data_companies['name'] ?? "-"}}</b></li>
+            </ol>
+        </nav>
         <table class="table table-responsive table-striped table-bordered" id="datatable_webmail">
             <thead>
               <tr>
