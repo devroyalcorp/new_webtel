@@ -37,15 +37,34 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-    <div class="row justify-content-evenly" style="margin-top:10px">
+    <div class="row">
+        <div class="col-md-12 text-center" style="margin-top:10px;">
+            <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
+        </div>
+    </div>
+    <div class="row justify-content-evenly" style="margin-top:20px">
         @foreach($data_companies as $key=>$v)
+            <?php
+            $color_background = "#4B0082";
+                    switch ($v['name']) {
+                        case "PT Anugerah Cemerlang Abadi":
+                            $color_background = "#663399 ";
+                            break;
+                        case "PT Bestari Mulia":
+                            $color_background = "#6495ED";
+                            break;
+                        case "PT Cemerlang Abadi Mulia":
+                            $color_background = "#8B0000";
+                            break;
+                    }
+            ?>
         <div class="col-md-3" style="margin-top:10px">
-            <div class="circle">
+            <div class="circle" style="background-color:{{$color_background}}" href="{{ route('webtel.detail', ['id' => $v->id]) }}">
                 <a href="{{ route('webtel.detail', ['id' => $v->id]) }}" class="link_circle" style="color:white;">
                     <i class="fa fa-phone icon_center"></i>
                 </a>
             </div>
-            <p class="text-center">{{$v['name']}}</p>
+            <p class="text-center" style="font-size:20px;font-weight:bolder;">{{$v['name']}}</p>
         </div>
         @endforeach
     </div>

@@ -78,7 +78,7 @@
                         // loadingDone()
                         if (response.status == 202) {
                             toastr.success(response.msg, response.title)
-                            location.href = '/' 
+                            location.href = '/webtel/companies/'+response.data; 
                         } else {
                             toastr.error(response.msg, response.title)
                         }

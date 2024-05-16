@@ -21,18 +21,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
 
-//webmail
-Route::get('/webmail', [WebmailController::class, 'index'])->name('webmail.index');
-Route::get('/webmail/companies/{id}', [WebmailController::class, 'detail_webmail'])->name('webmail.detail');
-Route::get('/webmail/datatables/{id}', [WebmailController::class, 'datatables_webmail'])->name('webmail.datatables');
-Route::get('/webmail/get_employee_webmail/{id}', [WebmailController::class, 'get_employee_webmail'])->name('webmail.get_employee_webmail');
-Route::post('/webmail/update_webmail', [WebmailController::class, 'update'])->name('webmail.update');
+//webmail old (if want to use again this controller just uncomment this and all .old and .bak file)
+// Route::get('/', [IndexController::class, 'index'])->name('home');
+// Route::get('/webmail', [WebmailController::class, 'index'])->name('webmail.index');
+// Route::get('/webmail/companies/{id}', [WebmailController::class, 'detail_webmail'])->name('webmail.detail');
+// Route::get('/webmail/datatables/{id}', [WebmailController::class, 'datatables_webmail'])->name('webmail.datatables');
+// Route::get('/webmail/get_employee_webmail/{id}', [WebmailController::class, 'get_employee_webmail'])->name('webmail.get_employee_webmail');
+// Route::post('/webmail/update_webmail', [WebmailController::class, 'update'])->name('webmail.update');
 
 
 // webtel
-Route::get('/webtel', [WebtelController::class, 'index'])->name('webtel.index');
+Route::get('/', [WebtelController::class, 'index'])->name('webtel.index');
 Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])->name('webtel.detail');
 Route::get('/webtel/datatables/{id}', [WebtelController::class, 'datatables_webtel'])->name('webtel.datatables');
 Route::get('/webtel/get_employee_webtel/{id}', [WebtelController::class, 'get_employee_webtel'])->name('webtel.get_employee_webtel');

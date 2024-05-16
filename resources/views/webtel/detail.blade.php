@@ -9,18 +9,19 @@
 
 @section('content')
     <div class="container-fluid" style="margin-top:15px;">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page" style="font-size:30px;"><b>{{$data_companies['name'] ?? "-"}}</b></li>
-            </ol>
-        </nav>
-        <table class="table table-responsive table-striped table-bordered" id="datatable_webtel">
+        <div class="row">
+            <div class="col-md-12 text-center" style="margin-top:10px;">
+                <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
+            </div>
+        </div>
+        <table class="table table-responsive table-striped table-bordered" style="margin-top:10px;" id="datatable_webtel">
             <thead>
               <tr>
                 <th scope="col">Company</th>
                 <th scope="col">Name</th>
                 <th scope="col">Department</th>
                 <th scope="col">Extention</th>
+                <th scope="col">Email</th>
                 @if(Session::get('login_status'))
                     <th scope="col">Action</th>
                 @endif
@@ -61,7 +62,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary btn-simpan">Save Changes</button>
                         </div>
                     </form>        
@@ -74,7 +75,7 @@
 
 @section('script')
 <script type="text/javascript">
-    let id_company = {{$id_company}};
+    let id_company = {{$id_company ?? null}};
     let table;
     $(document).ready(function () {
         $('#datatable_webtel').DataTable().destroy();
@@ -103,7 +104,7 @@
             lengthChange: true,
             ordering: true,
             info: true,
-            order: [[0, 'asc']],
+            order: [[1, 'asc']],
             orderCellsTop: true,
             autoWidth: false,
             responsive: true,
@@ -111,13 +112,13 @@
             serverSide: true,
             @if(Session::get('login_status'))
                 "columnDefs": [ {
-                    "targets": 4,
+                    "targets": 5,
                     "orderable": false,
                 } ],
             @endif
             ajax: '/webtel/datatables/'+id_company,
             pagingType: "full_numbers",
-            dom: "<'row w100'<'col-sm-6'l><'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row w100'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row w100'<'col-sm-3'l><'col-sm-6'p><'col-sm-3'i>>",
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             columns: [
                 { 
@@ -134,16 +135,26 @@
                     render: function ( data, type, row ) {
                         if(data == null || data == ""){
                             if(row.extention_number == null || row.extention_number == ""){
-                                return "(-) -";
+                                return "(-) "+Math.floor(Math.random()*(999-100+1)+100);
                             }else{
-                                return "(-)"+row.extention_number;
+                                return "(-) "+row.extention_number;
                             }
                         }else{
                             if(row.extention_number == null || row.extention_number == ""){
-                                return "("+data+") -";
+                                return "("+data+") "+Math.floor(Math.random()*(999-100+1)+100);
                             }else{
                                 return "("+data+") "+row.extention_number;
                             }
+                        }
+                    }
+                },
+                { 
+                    data: 'work_email',
+                    render: function ( data, type, row ) {
+                        if(data == null || data == ""){
+                            return "-";
+                        }else{
+                            return data;
                         }
                     }
                 },

@@ -77,7 +77,7 @@
     <!-- /.content-header -->
   </div>
   <!-- /.content-footer -->
-  @include('template.footer')
+  {{-- @include('template.footer') --}}
 </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper Datatables Debounce-->
