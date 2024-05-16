@@ -3,50 +3,90 @@
 <title>Login</title>
 @endsection
 @section('style')
-<style>
-</style>
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        .content .form-group {
+            width: 100%;
+        }
+    </style>
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <section class="bg-light py-3 py-md-5">
-            <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div class="card border border-light-subtle rounded-3 shadow-sm">
-                    <div class="card-body p-3 p-md-4 p-xl-5">
-                    <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Login</h2>
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="forms-wrap">
                     <form id="form_login" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <div class="row gy-2 overflow-hidden">
-                            <div class="col-12">
-                                <div class="form-floating mb-3">
-                                <input type="username" class="form-control" name="username" id="username" placeholder="Username" required>
-                                <label for="username" class="form-label">Username</label>
+                        <div class="mb-3 d-grid align-items-center justify-content-center">
+                            <img src="{{ asset('img/logo-royalcorp.png') }}" class="mx-auto rounded rounded-circle shadow" alt="royal" width="75">
+                            <h4 class="text-uppercase mt-2">PT ROYAL ABADI SEJAHTERA</h4>
+                        </div>
+
+                        <div class="heading mb-2">
+                            <h5>Welcome Back !</h5>
+                            <span>Please login to continue</span>
+                        </div>
+
+                        <div class="actual-form">
+                            <div class="form-group mb-3">
+                                <div class="content d-block">
+                                    <i class="lock fa fa-user"></i>
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating mb-3">
-                                <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
-                                <label for="password" class="form-label">Password</label>
+
+                            <div class="form-group mb-2">
+                                <div class="content d-block">
+                                    <i class="lock fa fa-lock"></i>
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" required>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="d-grid my-3">
-                                <button class="btn btn-primary btn-lg btn-login" type="submit">Log in</button>
-                                </div>
+                            <div class=" form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="show-hide-password" onchange="showHidePassword(this, $('#password'))">
+                                <label class="form-check-label position-relative font-size-12" style="transform: none;" for="show-hide-password">
+                                    Show Password
+                                </label>
+                            </div>
+
+                            <button type="submit" class="sign-btn mt-2 btn-login">
+                                Sign In
+                            </button>
+
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="carousel-container">
+                    <div class="images-wrapper">
+                        <img src="{{ asset('img/authentication-bg.jpg') }}" class="bg-img-right" alt="Royal Company">
+                    </div>
+                    <div class="text-slider">
+                        <img src="{{ asset('img/brand-all.png') }}" class="image img-1 show" alt="Royal Brands">
+                        <div class="">
+                            <div class="text-group mb-3">
+                                <h2 class="mb-0">Jl. Raya Cimareme No 275 Padalarang - 40552</h2>
+                                <h2>Tlp. +622-6866360</h2>
                             </div>
                         </div>
-                    </form>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-        </section>
-    </div>
+        </div>
+    </main>
 @endsection
 @section('script')
     <script type="text/javascript">
+        function showHidePassword(el, inputTarget) {
+            $(inputTarget).attr('type', $(inputTarget).is(':password') ? 'text' : 'password');
+
+            // if ($(inputTarget).attr('type') === 'password') {
+            //     $(el).removeClass('fa-eye').addClass('fa-eye-slash');
+            // } else {
+            //     $(el).removeClass('fa-eye-slash').addClass('fa-eye');
+            // }
+        }
+
         $(document).ready(function () {
             var loading = function () {
                 $('.btn-simpan').attr('disabled', 'disabled')

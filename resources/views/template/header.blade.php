@@ -6,7 +6,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="#">
-          <img src="{{ asset('img/royalcorp_1.jpg')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+          <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="50" height="50" class="d-inline-block align-text-top">
         </a>
         @if(Session::get('login_status'))
           <a class="navbar-brand" href="#"">Web Telekomunikasi</a>
