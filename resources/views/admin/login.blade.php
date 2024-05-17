@@ -5,8 +5,18 @@
 @section('style')
     <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
     <style>
-        .content .form-group {
-            width: 100%;
+
+        .content-wrapper{
+            height:100%;
+        }
+
+        @media (min-width: 760px) {
+            .container-fluid{
+                height:90%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
     </style>
 @endsection

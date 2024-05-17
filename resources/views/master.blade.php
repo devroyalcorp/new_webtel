@@ -28,22 +28,24 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css" /> --}}
 
     <style>
-  
+      html,body,.wrapper{
+        height:100%;
+      }
 
     </style>
 </head>
 @yield('style')
 <body class="">
 <div class="wrapper">
-@include('template.header')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-    @yield('content')
-      </div><!-- /.container-fluid -->
+      @include('template.header')
     </div>
+      <div class="container-fluid">
+        @yield('content')
+      </div><!-- /.container-fluid -->
     <!-- /.content-header -->
   </div>
   <!-- /.content-footer -->

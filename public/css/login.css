@@ -7,8 +7,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-
-
 body,
 input {
     font-family: "Poppins", sans-serif;
@@ -16,28 +14,30 @@ input {
 
 main {
     width: 100%;
-    min-height: 100%;
+    /* min-height: 100%; */
     overflow: hidden;
     background-color: #ffffff;
     padding-right: 2rem;
     padding-left: 2rem;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     padding-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.container-fluid{
+.container-fluid {
     padding-right: 0px !important;
     padding-left: 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .box {
     position: relative;
-    margin-top: 2rem;
     width: 100%;
-    max-width: 890px;
-    height: 450px;
+    max-width: 60%;
+    height: 480px;
     /*background-color: #fff;/*matikan jika latar di ganti*/
     border-radius: 1.3rem;
     box-shadow: 0px 15px 15px 15px rgba(0, 0, 0, 0.1);

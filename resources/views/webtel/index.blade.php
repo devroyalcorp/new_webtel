@@ -4,6 +4,18 @@
 @endsection
 @section('style')
 <style>
+    .content-wrapper{
+        height:100%;
+      }
+      @media (min-width: 760px) {
+        .container-fluid{
+            height:90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      }
+
 </style>
 @endsection
 @section('content')
