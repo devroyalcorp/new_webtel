@@ -36,7 +36,7 @@ main {
 .box {
     position: relative;
     width: 100%;
-    max-width: 60%;
+    max-width: 70%;
     height: 480px;
     /*background-color: #fff;/*matikan jika latar di ganti*/
     border-radius: 1.3rem;
