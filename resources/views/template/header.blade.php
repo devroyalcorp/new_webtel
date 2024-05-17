@@ -1,19 +1,22 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-light" style="background-color: #4B0082 !important">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-color: #68D2E8 !important">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">
-          <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="50" height="50" class="d-inline-block align-text-top">
-        </a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01" style="padding:0 20px 0 20px;color:#4B0082;">
         @if(Session::get('login_status'))
-          <a class="navbar-brand" style="font-size:22px;" href="#"">Web Telekomunikasi</a>
+          <a class="navbar-brand" href="#">
+            <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top">
+          </a>
+          <a class="navbar-brand" style="font-size:22px;font-weight:bolder;" href="#"">Web Telekomunikasi</a>
         @else
-          <a class="navbar-brand" style="font-size:22px;" href="{{route('webtel.index')}}">Web Telekomunikasi</a>
+          <a class="navbar-brand" href="{{route('webtel.index')}}">
+            <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top">
+          </a>
+          <a class="navbar-brand" style="font-size:22px;font-weight:bolder;" href="{{route('webtel.index')}}">Web Telekomunikasi</a>
         @endif
-        <ul class="navbar-nav" style="border-left:3px solid #6c757d;margin-left:auto;padding-left: 5px;">
+        <ul class="navbar-nav" style="border-left:2px solid #6c757d;margin-left:auto;padding-left: 5px;">
           <li class="nav-item pr-5">
             @if(!Session::get('login_status'))
               <a class="nav-link" href="{{route('admin.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>

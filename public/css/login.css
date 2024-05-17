@@ -8,9 +8,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #999999;
-}
 
 body,
 input {
@@ -19,20 +16,28 @@ input {
 
 main {
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     overflow: hidden;
     background-color: #ffffff;
-    padding: 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 5px;
+    padding-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.container-fluid{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
 
 .box {
     position: relative;
+    margin-top: 2rem;
     width: 100%;
-    max-width: 720px;
-    height: 440px;
+    max-width: 890px;
+    height: 450px;
     /*background-color: #fff;/*matikan jika latar di ganti*/
     border-radius: 1.3rem;
     box-shadow: 0px 15px 15px 15px rgba(0, 0, 0, 0.1);
@@ -60,7 +65,7 @@ main {
 }
 
 form {
-    max-width: 260px;
+    max-width: 90%;
     width: 100%;
     margin: 0 auto;
     height: 100%;

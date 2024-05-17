@@ -29,3 +29,14 @@
 .circle:hover{
     box-shadow: 0 4px 8px 0 blueviolet, 0 6px 20px 0 blueviolet !important;
 }
+/* .img_control{
+    width:60% !important; 
+    height:70% !important;
+}
+
+@media (max-width: 767) {
+    .img_control{
+        width:50% !important;
+        height:60% !important;
+    }
+} */

@@ -33,13 +33,13 @@
                             break;
                     }
             ?>
-        <div class="col-md-3" style="margin-top:10px">
+        <div class="col-md-6" style="margin-top:10px">
             <div class="circle" href="{{ route('webtel.detail', ['id' => $v->id]) }}">
                 <a href="{{ route('webtel.detail', ['id' => $v->id]) }}" class="text-center" style="color:white;text-align:center;">
-                    <img src="{{ $url_img }}" class="mx-auto rounded rounded-circle shadow center" alt="royal" width="100%" height="80%">
+                    <img style="display:block;" src="{{ $url_img }}" class="mx-auto rounded rounded-circle shadow center" alt="royal" width="45%" height="55%">
                 </a>
             </div>
-            <p class="text-center" style="font-size:20px;font-weight:bolder;">{{$v['name']}}</p>
+            <p class="text-center" style="font-size:30px;font-weight:bolder;margin-top:20px">{{$v['name']}}</p>
         </div>
         @endforeach
     </div>
