@@ -11,6 +11,7 @@ class WebtelController extends Controller
 {
     public function index()
     {
+        Session::forget('name_company');
         $data_companies = Companies::whereNotIn('id', [5,6])->orderBy('id','asc')->get();
 
         return view('webtel.index',compact('data_companies'));

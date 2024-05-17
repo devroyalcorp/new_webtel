@@ -4,35 +4,6 @@
 @endsection
 @section('style')
 <style>
-    .circle {
-        display: flex;
-        margin:auto;
-        justify-content: center;
-        align-items: center;
-        width: 200px;
-        height: 200px;
-        background-color: red;
-        border-radius: 50%;
-        color: white;
-        font-size: 24px;
-        position: relative;
-    }
-
-    .icon_center {
-        font-size: 48px;
-        text-align: center;
-    }
-
-    .text {
-        font-size: 24px;
-    }
-    .link_circle{
-        color:white;
-    }
-
-    .link_circle:hover{
-        color:blueviolet;
-    }
 </style>
 @endsection
 @section('content')
@@ -46,22 +17,26 @@
         @foreach($data_companies as $key=>$v)
             <?php
             $color_background = "#4B0082";
+            $url_img = asset('img/logo-royalcorp.png');
                     switch ($v['name']) {
                         case "PT Anugerah Cemerlang Abadi":
                             $color_background = "#663399 ";
+                            $url_img = asset('img/aca_logo.png');
                             break;
                         case "PT Bestari Mulia":
                             $color_background = "#6495ED";
+                            $url_img = asset('img/bm_logo.png');
                             break;
                         case "PT Cemerlang Abadi Mulia":
                             $color_background = "#8B0000";
+                            $url_img = asset('img/cam_logo.png');
                             break;
                     }
             ?>
         <div class="col-md-3" style="margin-top:10px">
-            <div class="circle" style="background-color:{{$color_background}}" href="{{ route('webtel.detail', ['id' => $v->id]) }}">
-                <a href="{{ route('webtel.detail', ['id' => $v->id]) }}" class="link_circle" style="color:white;">
-                    <i class="fa fa-phone icon_center"></i>
+            <div class="circle" href="{{ route('webtel.detail', ['id' => $v->id]) }}">
+                <a href="{{ route('webtel.detail', ['id' => $v->id]) }}" class="text-center" style="color:white;text-align:center;">
+                    <img src="{{ $url_img }}" class="mx-auto rounded rounded-circle shadow center" alt="royal" width="100%" height="80%">
                 </a>
             </div>
             <p class="text-center" style="font-size:20px;font-weight:bolder;">{{$v['name']}}</p>

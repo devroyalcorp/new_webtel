@@ -104,6 +104,7 @@
             lengthChange: true,
             ordering: true,
             info: true,
+            scrollX: true,
             order: [[1, 'asc']],
             orderCellsTop: true,
             autoWidth: false,

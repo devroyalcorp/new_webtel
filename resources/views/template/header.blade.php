@@ -9,12 +9,12 @@
           <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="50" height="50" class="d-inline-block align-text-top">
         </a>
         @if(Session::get('login_status'))
-          <a class="navbar-brand" href="#"">Web Telekomunikasi</a>
+          <a class="navbar-brand" style="font-size:22px;" href="#"">Web Telekomunikasi</a>
         @else
-          <a class="navbar-brand" href="{{route('webtel.index')}}">Web Telekomunikasi</a>
+          <a class="navbar-brand" style="font-size:22px;" href="{{route('webtel.index')}}">Web Telekomunikasi</a>
         @endif
-        <ul class="navbar-nav" style="border-left:3px solid #6c757d;margin-left:auto;">
-          <li class="nav-item">
+        <ul class="navbar-nav" style="border-left:3px solid #6c757d;margin-left:auto;padding-left: 5px;">
+          <li class="nav-item pr-5">
             @if(!Session::get('login_status'))
               <a class="nav-link" href="{{route('admin.login')}}"><i class="fa fa-sign-in" aria-hidden="true"></i>
                   Login</a>
