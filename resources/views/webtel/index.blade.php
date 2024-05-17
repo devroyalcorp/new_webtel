@@ -33,7 +33,7 @@
                             break;
                     }
             ?>
-        <div class="col-md-6" style="margin-top:10px">
+        <div class="col-md-3" style="margin-top:10px">
             <div class="circle" href="{{ route('webtel.detail', ['id' => $v->id]) }}">
                 <a href="{{ route('webtel.detail', ['id' => $v->id]) }}" class="text-center" style="color:white;text-align:center;">
                     <img style="display:block;" src="{{ $url_img }}" class="mx-auto rounded rounded-circle shadow center" alt="royal" width="45%" height="55%">
