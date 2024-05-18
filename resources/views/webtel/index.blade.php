@@ -3,6 +3,8 @@
 <title>Home</title>
 @endsection
 @section('style')
+<link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
+
 <style>
     .content-wrapper{
         height:100%;

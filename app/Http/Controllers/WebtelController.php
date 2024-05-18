@@ -21,14 +21,14 @@ class WebtelController extends Controller
     {
         if($id == 1){
             $ids_company = [$id,5,6];
-            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','departments.name','companies.acronym')
+            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
             ->whereIn('job_details.company_id',$ids_company)
             ->get();
         }else{
-            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','departments.name','companies.acronym')
+            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
@@ -47,7 +47,10 @@ class WebtelController extends Controller
     }
 
     public function get_employee_webtel($id){
-        $data = JobDetails::where('employee_id',$id)->first();
+        $data = JobDetails::select('job_details.*', 'employees.first_name', 'employees.last_name')
+                ->leftjoin('employees', 'employees.id','=','job_details.employee_id')
+                ->where('job_details.employee_id',$id)
+                ->first();
 
         if($data){
             return response()->json(['status' => 202, 'msg' => "Data has been !", 'title' => 'Berhasil!', 'type' => 'success', 'data' => $data]);
