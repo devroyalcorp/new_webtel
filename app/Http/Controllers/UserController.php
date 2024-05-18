@@ -11,6 +11,12 @@ use Exception;
 
 class UserController extends Controller
 {
+    protected $connection;
+
+    public function __construct(Type $var = null) {
+        $this->connection = LdapContainer::getConnection('default');
+    }
+
     public function index()
     {
         return view('admin.login');
@@ -19,24 +25,30 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->all();
-        // dd($data);
+
         try {
             $ldapUser = LdapUser::findByOrFail('samaccountname', $data['username']);
-
+            
             if($ldapUser){
-                $companies = Companies::get();
-                $data_companies = null;
-                foreach($companies as $key=>$val){
-                    if(strtoupper ($val['name']) == $ldapUser['company'][0]){
-                        $data_companies = $val;
-                        break;
-                    }
-                }
-                
-                Session::put('login_status', true);
-                Session::forget('name_company');
+                // dd($this->connection->auth()->attempt($ldapUser->getDn(), $data['password']));
+                if ($this->connection->auth()->attempt($ldapUser->getDn(), $data['password'])) {
 
-                return response()->json(['status' => 202, 'msg' => "Login Succesfully!", 'title' => 'Login Success!!', 'type' => 'success', 'data'=>$data_companies['id']]);
+                    $companies = Companies::get();
+                    $data_companies = null;
+                    foreach($companies as $key=>$val){
+                        if(strtoupper ($val['name']) == $ldapUser['company'][0]){
+                            $data_companies = $val;
+                            break;
+                        }
+                    }
+                    
+                    Session::put('login_status', true);
+                    Session::forget('name_company');
+    
+                    return response()->json(['status' => 202, 'msg' => "Login Succesfully!", 'title' => 'Login Success!!', 'type' => 'success', 'data'=>$data_companies['id']]);
+                }else{
+                    return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!!', 'type' => 'error']);
+                }
             }else{
                 return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!!', 'type' => 'error']);
             }
