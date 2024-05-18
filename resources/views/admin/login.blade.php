@@ -10,12 +10,18 @@
             height:100%;
         }
 
-        @media (min-width: 760px) {
+        @media (min-width: 920px) {
             .container-fluid{
                 height:90%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            main{
+                padding-top:3rem;
             }
         }
     </style>
