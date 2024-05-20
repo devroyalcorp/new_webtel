@@ -26,15 +26,23 @@ class WebtelController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
             ->whereIn('job_details.company_id',$ids_company)
-            ->get();
+            ->where('employees.active', true)
+            ->where('employees.is_internal', true);
+
         }else{
             $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
             ->where('job_details.company_id',$id)
-            ->get();
+            ->where('employees.active', true)
+            ->where('employees.is_internal', true);
         }
+
+        if($this->checkExistedSession('login_status') == false){
+            $data_companies->where('job_details.extention_number', '!=', null);
+        }
+        $data_companies->get();
 
         return DataTables::of($data_companies)
         ->addIndexColumn()
@@ -85,5 +93,13 @@ class WebtelController extends Controller
 
     public function delete(){
         
+    }
+
+    function checkExistedSession($name_session){
+        if(Session::get($name_session)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

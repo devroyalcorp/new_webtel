@@ -14,8 +14,8 @@
                 <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
             </div>
         </div>
-        <table class="table table-responsive table-striped table-bordered" id="datatable_webtel">
-            <thead>
+        <table class="table table-responsive table-striped table-bordered border-light table-hover" style="border:" id="datatable_webtel">
+            <thead style="background-color:#b0d12a !important;font-size:18px;">
               <tr>
                 <th scope="col">Company</th>
                 <th scope="col">Full Name</th>
@@ -82,7 +82,7 @@
         $('#datatable_webtel thead tr').clone(true).appendTo('#datatable_webtel thead');
         $('#datatable_webtel thead tr:eq(1) th').each(function(i) {
             var title = $(this).text();
-            $(this).html('<input type="text" class="filter_table" placeholder="Search ' + title + '" class="form-control"/>');
+            $(this).html('<input type="text" class="filter_table form-control" placeholder="Search ' + title + '" class="form-control"/>');
 
             if (title == 'Action') {
                 $(this).empty();
@@ -119,7 +119,7 @@
             @endif
             ajax: '/webtel/datatables/'+id_company,
             pagingType: "full_numbers",
-            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row w100'<'col-sm-3'l><'col-sm-6'p><'col-sm-3'i>>",
+            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row w100'<'col-sm-4'l><'col-sm-5'p><'col-sm-3'i>>",
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             columns: [
                 { 
@@ -146,13 +146,13 @@
                     render: function ( data, type, row ) {
                         if(data == null || data == ""){
                             if(row.extention_number == null || row.extention_number == ""){
-                                return "(-) "+Math.floor(Math.random()*(999-100+1)+100);
+                                return "(-) "+ " - ";
                             }else{
                                 return "(-) "+row.extention_number;
                             }
                         }else{
                             if(row.extention_number == null || row.extention_number == ""){
-                                return "("+data+") "+Math.floor(Math.random()*(999-100+1)+100);
+                                return "("+data+") "+ " - ";
                             }else{
                                 return "("+data+") "+row.extention_number;
                             }
