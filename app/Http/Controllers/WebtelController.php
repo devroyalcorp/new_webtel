@@ -74,6 +74,7 @@ class WebtelController extends Controller
         
         $updated_jobdetails->line_number = $data['line_number'];
         $updated_jobdetails->extention_number = $data['extention_number'];
+        $updated_jobdetails->updated_at = date('Y-m-d H:i:s.u');
         $updated_jobdetails->update();
 
         if($updated_jobdetails){
@@ -119,7 +120,8 @@ class WebtelController extends Controller
             'type' => $type,
             'menus' => $menus,
             'web_name' => $web_name,
-            'old_data' => $old_data
+            'old_data' => $old_data,
+            'created_at' => date('Y-m-d H:i:s.u')
         ]); 
     }
 }
