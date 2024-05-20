@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Companies;
 use App\Models\JobDetails;
+use App\Models\LogHistories;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
 class WebtelController extends Controller
@@ -21,7 +22,7 @@ class WebtelController extends Controller
     {
         if($id == 1){
             $ids_company = [$id,5,6];
-            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
+            $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
@@ -61,9 +62,9 @@ class WebtelController extends Controller
                 ->first();
 
         if($data){
-            return response()->json(['status' => 202, 'msg' => "Data has been !", 'title' => 'Berhasil!', 'type' => 'success', 'data' => $data]);
+            return response()->json(['status' => 202, 'msg' => "Data exist!", 'title' => 'Success!', 'type' => 'success', 'data' => $data]);
         }else{
-            return response()->json(['status' => 500, 'msg' => "There is no data!", 'title' => 'Gagal!', 'type' => 'error']);
+            return response()->json(['status' => 500, 'msg' => "Data doesnt exist!", 'title' => 'Failed!', 'type' => 'error']);
         }
     }
 
@@ -76,9 +77,14 @@ class WebtelController extends Controller
         $updated_jobdetails->update();
 
         if($updated_jobdetails){
-            return response()->json(['status' => 202, 'msg' => "Update succesfull!", 'title' => 'Berhasil!', 'type' => 'success']);
+            $old_data =[
+                "old_line_number" => $data['line_number'],
+                "old_extention_number" => $data['extention_number'],
+            ];
+            $this->createLog($updated_jobdetails['id'], Session::get('users_session'), $data['employee_id'], "UPDATE", 'webtel detail', 'Web Telekomunikasi', $old_data);
+            return response()->json(['status' => 202, 'msg' => "Update succesfull!", 'title' => 'Success!', 'type' => 'success']);
         }else{
-            return response()->json(['status' => 500, 'msg' => "Update Failed!", 'title' => 'Gagal!', 'type' => 'error']);
+            return response()->json(['status' => 500, 'msg' => "Update Failed!", 'title' => 'Failed!', 'type' => 'error']);
         }
     }
 
@@ -101,5 +107,19 @@ class WebtelController extends Controller
         }else{
             return false;
         }
+    }
+
+    //function of create log the type is all the name if have id its integer and others is string
+    function createLog($history_id=null, $user_id=null, $employee_id=null, $type=null, $menus=null, $web_name=null, $old_data=[]){
+        $old_data = json_encode($old_data);
+        $create_log = LogHistories::create([
+            'history_id' => $history_id,
+            'user_id' => $user_id,
+            'employee_id' => $employee_id,
+            'type' => $type,
+            'menus' => $menus,
+            'web_name' => $web_name,
+            'old_data' => $old_data
+        ]); 
     }
 }

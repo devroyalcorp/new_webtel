@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LoghistoriesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebmailController;
 use App\Http\Controllers\WebtelController;
@@ -37,6 +38,10 @@ Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])
 Route::get('/webtel/datatables/{id}', [WebtelController::class, 'datatables_webtel'])->name('webtel.datatables');
 Route::get('/webtel/get_employee_webtel/{id}', [WebtelController::class, 'get_employee_webtel'])->name('webtel.get_employee_webtel');
 Route::post('/webtel/update_webtel', [WebtelController::class, 'update'])->name('webtel.update');
+
+// for log
+Route::get('/webtel/datatables_loghistory/{id}', [LoghistoriesController::class, 'datatables_loghistory'])->name('webtel.datatables_loghistory');
+Route::get('/webtel/check_history/{id}', [LoghistoriesController::class, 'check_history'])->name('webtel.check_history');
 
 //for admin
 Route::get('/login', [UserController::class, 'index'])->name('admin.login');

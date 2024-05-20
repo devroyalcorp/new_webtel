@@ -27,9 +27,9 @@
                 @endif
               </tr>
             </thead>
-          </table>
+        </table>
 
-                  <!-- Modal -->
+        <!-- Modal Update -->
         <div class="modal fade" id="modal_update" tabindex="-1" aria-labelledby="modal_update" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -70,6 +70,31 @@
             </div>
             </div>
         </div>
+
+        <!-- Modal Histories -->
+        <div class="modal fade" id="modal_histories" tabindex="-1" aria-labelledby="modal_histories" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" style="" id="modal_histories_title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-responsive table-striped table-bordered border-light table-hover" style="border:" id="datatable_history">
+                        <thead style="background-color:#b0d12a !important;font-size:16px;">
+                          <tr>
+                            <th scope="col">Web Name</th>
+                            <th scope="col">Menu</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Modified By</th>
+                            <th scope="col">Modified At</th>
+                          </tr>
+                        </thead>
+                    </table>       
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -77,6 +102,7 @@
 <script type="text/javascript">
     let id_company = {{$id_company ?? null}};
     let table;
+    let table_histories;
     $(document).ready(function () {
         $('#datatable_webtel').DataTable().destroy();
         $('#datatable_webtel thead tr').clone(true).appendTo('#datatable_webtel thead');
@@ -119,7 +145,7 @@
             @endif
             ajax: '/webtel/datatables/'+id_company,
             pagingType: "full_numbers",
-            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row w100'<'col-sm-4'l><'col-sm-5'p><'col-sm-3'i>>",
+            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row mt-2 w100'<'col-sm-4 'l><'col-sm-5'p><'col-sm-3'i>>",
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             columns: [
                 { 
@@ -175,6 +201,7 @@
                         render: function ( data, type, row ) {
                             return `<div class="btn-group" role="group" aria-label="action">
                                     <a type="button" class="btn btn-primary btn-sm" onclick="UpdateEmployee(${data})"><i class="fas fa-edit icon_plus"></i>Edit</a>
+                                    <a type="button" class="btn btn-info btn-sm ms-1" onclick="ReadLogHistory(${row.id})"><i class="fas fa-history icon_plus"></i>History</a>
                                     </div>`;
                         }
                     },
@@ -227,6 +254,72 @@
                 toastr.error(response.msg, response.title)
                 table.draw();
             }
+        });
+    }
+
+    function ReadLogHistory(id){
+
+        $.ajax({
+            url: `/webtel/check_history/`+id,
+            type: "GET",
+            cache: false,
+            success:function(response){
+                var data = response.data
+                if (response.status == 202) {
+                    var name = data.first_name + " " + data.last_name;
+                    $('#datatable_history').DataTable().destroy();
+                    datatableHistory(data.history_id, name);
+                }else{
+                    toastr.error(response.msg, response.title)
+                }
+            },
+            error:function(response){
+                // console.log(response.data)
+                toastr.error(response.msg, response.title)
+                table.draw();
+            }
+        });
+    }
+
+    function datatableHistory(id, name){
+        $('#modal_histories_title').text("Log History | "+name)
+
+        $('#modal_histories').modal('show')
+
+        table_histories = $('#datatable_history').DataTable({
+            searching: true,
+            paging: true,
+            lengthChange: false,
+            ordering: false,
+            info: true,
+            scrollX: true,
+            order: [[4, 'desc']],
+            orderCellsTop: true,
+            autoWidth: false,
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: '/webtel/datatables_loghistory/'+id,
+            pagingType: "full_numbers",
+            dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row mt-2 w100'<'col-sm-9'p><'col-sm-3'i>>",
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            columns: [
+                { 
+                    data: 'web_name',
+                },
+                { 
+                    data: 'menus',
+                },
+                { 
+                    data: 'type',
+                },
+                { 
+                    data: 'name_user',
+                },
+                { 
+                    data: 'created_at',
+                },
+            ]
         });
     }
 

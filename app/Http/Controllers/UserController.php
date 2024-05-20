@@ -7,6 +7,7 @@ use Session;
 use LdapRecord\Container as LdapContainer;
 use App\Ldap\User as LdapUser;
 use App\Models\Companies;
+use App\Models\User;
 use Exception;
 
 class UserController extends Controller
@@ -28,20 +29,18 @@ class UserController extends Controller
 
         try {
             $ldapUser = LdapUser::findByOrFail('samaccountname', $data['username']);
-            
+
             if($ldapUser){
                 // dd($this->connection->auth()->attempt($ldapUser->getDn(), $data['password']));
                 if ($this->connection->auth()->attempt($ldapUser->getDn(), $data['password'])) {
 
-                    $companies = Companies::get();
-                    $data_companies = null;
-                    foreach($companies as $key=>$val){
-                        if(strtoupper ($val['name']) == $ldapUser['company'][0]){
-                            $data_companies = $val;
-                            break;
-                        }
-                    }
+                    $get_user = User::select('users.*','job_details.company_id')
+                    ->where('username', $ldapUser['samaccountname'])
+                    ->leftjoin('job_details', 'job_details.employee_id','=', 'users.employee_id')->first()->toArray();
+
+                    $data_companies = Companies::find($get_user['company_id']);
                     
+                    Session::put('users_session', $get_user['id']);
                     Session::put('login_status', true);
                     Session::forget('name_company');
     
