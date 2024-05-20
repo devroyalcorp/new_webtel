@@ -330,6 +330,8 @@
         $('#modal_histories').modal('show')
 
         table_histories.columns.adjust().draw();
+        table_histories.columns.adjust().responsive.recalc();
+        $('#modal_histories').trigger('resize')
     }
 
     $("#form_update").submit(function(e) {
