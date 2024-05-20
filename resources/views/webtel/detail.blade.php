@@ -5,7 +5,7 @@
 @section('style')
     <style>
         .dt-scroll-headInner{
-            width:100%;
+            width:100% !important;
         }
     </style>
 @endsection
@@ -18,7 +18,7 @@
             </div>
         </div>
         <table class="table table-responsive table-striped table-bordered border-light table-hover" id="datatable_webtel">
-            <thead style="background-color:#b0d12a !important;font-size:18px;" width="100%";>
+            <thead style="background-color:#b0d12a !important;font-size:18px;width:100% !important">
               <tr>
                 <th scope="col">Company</th>
                 <th scope="col">Full Name</th>
@@ -82,9 +82,9 @@
                 <h5 class="modal-title" style="" id="modal_histories_title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <table class="table table-responsive table-striped table-bordered border-light table-hover" id="datatable_history">
-                        <thead style="background-color:#b0d12a !important;font-size:16px;" width="100%">
+                <div class="modal-body" style="overflow:auto;width:100%;">
+                    <table class="table table-responsive table-striped table-bordered border-light" style="width:100% !important" id="datatable_history">
+                        <thead style="background-color:#b0d12a !important;font-size:16px;width:100% !important">
                           <tr>
                             <th scope="col">Web Name</th>
                             <th scope="col">Menu</th>
