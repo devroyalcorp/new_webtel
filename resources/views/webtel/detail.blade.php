@@ -7,9 +7,9 @@
         .dt-scroll-headInner{
             width:100% !important;
         }
-        table.dataTable {
+        /* table.dataTable {
             width: 100% !important;
-        }
+        } */
     </style>
 @endsection
 
@@ -288,9 +288,6 @@
     }
 
     function datatableHistory(id, name){
-        $('#modal_histories_title').text("Log History | "+name)
-
-        $('#modal_histories').modal('show')
 
         table_histories = $('#datatable_history').DataTable({
             searching: true,
@@ -327,6 +324,12 @@
                 },
             ]
         });
+
+        $('#modal_histories_title').text("Log History | "+name)
+
+        $('#modal_histories').modal('show')
+
+        table_histories.columns.adjust().draw();
     }
 
     $("#form_update").submit(function(e) {
