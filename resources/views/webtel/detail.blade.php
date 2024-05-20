@@ -7,6 +7,9 @@
         .dt-scroll-headInner{
             width:100% !important;
         }
+        table.dataTable {
+            width: 100% !important;
+        }
     </style>
 @endsection
 
