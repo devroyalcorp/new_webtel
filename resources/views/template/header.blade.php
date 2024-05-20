@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-color: #fff !important">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="  background-image: linear-gradient(to right, rgb(250, 255, 255), rgba(236, 255, 255));">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

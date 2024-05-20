@@ -4,6 +4,9 @@
 @endsection
 @section('style')
     <style>
+        .dt-scroll-headInner{
+            width:100%;
+        }
     </style>
 @endsection
 
@@ -14,8 +17,8 @@
                 <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
             </div>
         </div>
-        <table class="table table-responsive table-striped table-bordered border-light table-hover" style="border:" id="datatable_webtel">
-            <thead style="background-color:#b0d12a !important;font-size:18px;">
+        <table class="table table-responsive table-striped table-bordered border-light table-hover" id="datatable_webtel">
+            <thead style="background-color:#b0d12a !important;font-size:18px;" width="100%";>
               <tr>
                 <th scope="col">Company</th>
                 <th scope="col">Full Name</th>
@@ -80,8 +83,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-responsive table-striped table-bordered border-light table-hover" style="border:" id="datatable_history">
-                        <thead style="background-color:#b0d12a !important;font-size:16px;">
+                    <table class="table table-responsive table-striped table-bordered border-light table-hover" id="datatable_history">
+                        <thead style="background-color:#b0d12a !important;font-size:16px;" width="100%">
                           <tr>
                             <th scope="col">Web Name</th>
                             <th scope="col">Menu</th>
@@ -270,7 +273,7 @@
                     $('#datatable_history').DataTable().destroy();
                     datatableHistory(data.history_id, name);
                 }else{
-                    toastr.error(response.msg, response.title)
+                    toastr.info("Employee dont have log history !", "Warning!")
                 }
             },
             error:function(response){

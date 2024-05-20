@@ -47,7 +47,7 @@ class LoghistoriesController extends Controller
         if($data){
             return response()->json(['status' => 202, 'msg' => "Data Exist !", 'title' => 'Success!', 'type' => 'success', 'data' => $data]);
         }else{
-            return response()->json(['status' => 500, 'msg' => "Data doesnt exist!", 'title' => 'Failed!', 'type' => 'error']);
+            return response()->json(['status' => 500, 'msg' => "Data doesnt exist!", 'title' => 'Failed!', 'type' => 'warning']);
         }
     }
 }
