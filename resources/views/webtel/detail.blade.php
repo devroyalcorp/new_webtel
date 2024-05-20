@@ -7,6 +7,13 @@
         .dt-scroll-headInner{
             width:100% !important;
         }
+        .input_copied{
+            border: none !important;
+            box-shadow: none !important;
+            background-color: white !important;
+            cursor: default !important;
+            color:#000;
+        }
         /* table.dataTable {
             width: 100% !important;
         } */
@@ -109,6 +116,27 @@
     let id_company = {{$id_company ?? null}};
     let table;
     let table_histories;
+
+
+    function copyToClipboard(textToCopy, id){
+        console.log(textToCopy, id);
+        var input = document.createElement("input");
+        document.body.appendChild(input);
+        input.value = textToCopy;
+        input.select();
+        document.execCommand("Copy");
+        input.remove();
+
+        const button_copied = document.getElementById('button_'+id);
+        button_copied.setAttribute('title', 'Copied!');
+        button_copied.setAttribute("style","color:red");
+        setTimeout(() => {
+            button_copied.removeAttribute('title');
+            button_copied.setAttribute('title', 'Copy to clipboard!');
+            button_copied.removeAttribute('style');
+        }, 2000);
+    }
+
     $(document).ready(function () {
         $('#datatable_webtel').DataTable().destroy();
         $('#datatable_webtel thead tr').clone(true).appendTo('#datatable_webtel thead');
@@ -197,7 +225,7 @@
                         if(data == null || data == ""){
                             return "-";
                         }else{
-                            return data;
+                            return data + `<a type="button" class="ms-3" title="Copy to Clipboard" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})"><i class="fa fa-copy" aria-hidden="true"></i></a>`;
                         }
                     }
                 },
@@ -368,5 +396,6 @@
             complete: function(response) {}
         });
     });
+    
 </script>
 @endsection
