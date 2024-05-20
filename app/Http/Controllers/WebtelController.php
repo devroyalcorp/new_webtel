@@ -20,6 +20,13 @@ class WebtelController extends Controller
 
     public function datatables_webtel($id)
     {
+        $where = [];
+        if($this->checkExistedSession('login_status') == false){
+            $where = [
+                ['job_details.extention_number', '!=', null]
+            ];
+        }
+
         if($id == 1){
             $ids_company = [$id,5,6];
             $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
@@ -28,7 +35,9 @@ class WebtelController extends Controller
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
             ->whereIn('job_details.company_id',$ids_company)
             ->where('employees.active', true)
-            ->where('employees.is_internal', true);
+            ->where('employees.is_internal', true)
+            ->where($where)
+            ->get();
 
         }else{
             $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
@@ -37,13 +46,10 @@ class WebtelController extends Controller
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
             ->where('job_details.company_id',$id)
             ->where('employees.active', true)
-            ->where('employees.is_internal', true);
+            ->where('employees.is_internal', true)
+            ->where($where)
+            ->get();
         }
-
-        if($this->checkExistedSession('login_status') == false){
-            $data_companies->where('job_details.extention_number', '!=', null);
-        }
-        $data_companies->get();
 
         return DataTables::of($data_companies)
         ->addIndexColumn()
