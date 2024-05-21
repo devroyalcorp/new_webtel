@@ -17,6 +17,45 @@
         /* table.dataTable {
             width: 100% !important;
         } */
+
+    .tltp {
+        position: relative !important;
+        display: inline-block !important;
+      }
+
+      .tltp .tltptext {
+        visibility: hidden !important;
+        width: 140px !important;
+        background-color: #555 !important;
+        color: #fff !important;
+        text-align: center !important;
+        border-radius: 6px !important;
+        padding: 5px !important;
+        position: absolute !important;
+        z-index: 1 !important !important;
+        bottom: 100% !important;
+        left: 50% !important !important;
+        margin-left: -30px !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s !important;
+      }
+
+      .tltp .tltptext::after {
+        content: "" !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 50% !important;
+        margin-left: -5px !important;
+        border-width: 5px !important;
+        border-style: solid !important;
+        border-color: #555 transparent transparent transparent !important;
+      }
+
+      .tltp:hover .tltptext {
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
     </style>
 @endsection
 
@@ -116,10 +155,9 @@
     let id_company = {{$id_company ?? null}};
     let table;
     let table_histories;
-
-
+      
     function copyToClipboard(textToCopy, id){
-        console.log(textToCopy, id);
+
         var input = document.createElement("input");
         document.body.appendChild(input);
         input.value = textToCopy;
@@ -128,11 +166,17 @@
         input.remove();
 
         const button_copied = document.getElementById('button_'+id);
-        button_copied.setAttribute('title', 'Copied!');
+
+        var tltp = document.getElementById("mytltp_"+id);
+        tltp.innerHTML = "Copied";
+
+        // button_copied.setAttribute('title', 'Copied!');
         button_copied.setAttribute("style","color:red");
         setTimeout(() => {
-            button_copied.removeAttribute('title');
-            button_copied.setAttribute('title', 'Copy to clipboard!');
+            // button_copied.removeAttribute('title');
+            // button_copied.setAttribute('title', 'Copy to clipboard!');
+            var tltp = document.getElementById("mytltp_"+id);
+            tltp.innerHTML = "Copy to Clipboard";
             button_copied.removeAttribute('style');
         }, 2000);
     }
@@ -225,7 +269,7 @@
                         if(data == null || data == ""){
                             return "-";
                         }else{
-                            return data + `<a type="button" class="ms-3" title="Copy to Clipboard" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})"><i class="fa fa-copy" aria-hidden="true"></i></a>`;
+                            return data + `<br><div class="tltp"><span class="tltptext" id="mytltp_${row.employee_id}">Copy to clipboard</span><button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})"><i class="fa fa-copy" aria-hidden="true"></i></button></div>`;
                         }
                     }
                 },
@@ -357,8 +401,7 @@
 
         $('#modal_histories').modal('show')
 
-        table_histories.columns.adjust().draw();
-        table_histories.columns.adjust().responsive.recalc();
+        table_histories.columns.adjust();
         $('#modal_histories').trigger('resize')
     }
 
