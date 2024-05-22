@@ -7,6 +7,9 @@
         .dt-scroll-headInner{
             width:100% !important;
         }
+        table.dataTable{
+            width:100% !important;
+        }
         .input_copied{
             border: none !important;
             box-shadow: none !important;
@@ -14,9 +17,9 @@
             cursor: default !important;
             color:#000;
         }
-        .table_history.dataTable {
+        /* .table_history.dataTable {
             width: 100% !important;
-        }
+        } */
 
     .tltp {
         position: relative !important;
@@ -66,20 +69,22 @@
                 <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
             </div>
         </div>
-        <table class="table table-responsive table-striped table-bordered border-light table-hover" id="datatable_webtel">
-            <thead style="background-color:#b0d12a !important;font-size:18px;width:100% !important">
-              <tr>
-                <th scope="col">Company</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Department</th>
-                <th scope="col">Extention</th>
-                <th scope="col">Email</th>
-                @if(Session::get('login_status'))
-                    <th scope="col">Action</th>
-                @endif
-              </tr>
-            </thead>
-        </table>
+        <div class="table-responsive">  
+            <table class="table table-striped table-bordered border-light table-hover" id="datatable_webtel">
+                <thead style="background-color:#b0d12a !important;font-size:18px;">
+                <tr>
+                    <th scope="col">Company</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Extention</th>
+                    <th scope="col">Email</th>
+                    @if(Session::get('login_status'))
+                        <th scope="col">Action</th>
+                    @endif
+                </tr>
+                </thead>
+            </table>
+        </div>
 
         <!-- Modal Update -->
         <div class="modal fade" id="modal_update" tabindex="-1" aria-labelledby="modal_update" aria-hidden="true">
@@ -131,9 +136,9 @@
                 <h5 class="modal-title" style="" id="modal_histories_title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="overflow:auto;width:100%;">
-                    <table class="table table-responsive table-striped table-bordered border-light table_history" style="width:100% !important" id="datatable_history">
-                        <thead style="background-color:#b0d12a !important;font-size:16px;width:100% !important">
+                <div class="modal-body table-responsive" style="overflow:auto;">
+                    <table class="table table-striped table-bordered border-light table_history" style="" id="datatable_history">
+                        <thead style="background-color:#b0d12a !important;font-size:16px;">
                           <tr>
                             <th scope="col">Web Name</th>
                             <th scope="col">Menu</th>
@@ -209,9 +214,9 @@
             ordering: true,
             info: true,
             scrollX: true,
+            scrollY: true,
             order: [[1, 'asc']],
             orderCellsTop: true,
-            autoWidth: false,
             responsive: true,
             processing: true,
             serverSide: true,
@@ -364,13 +369,12 @@
         table_histories = $('#datatable_history').DataTable({
             searching: true,
             paging: true,
-            lengthChange: false,
-            ordering: false,
+            lengthChange: true,
+            ordering: true,
             info: true,
             scrollX: true,
             order: [[4, 'desc']],
             orderCellsTop: true,
-            autoWidth: false,
             responsive: true,
             processing: true,
             serverSide: true,
