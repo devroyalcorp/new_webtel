@@ -14,7 +14,7 @@
             cursor: default !important;
             color:#000;
         }
-        #datatable_history table.dataTable {
+        .table_history.dataTable {
             width: 100% !important;
         }
 
@@ -132,7 +132,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="overflow:auto;width:100%;">
-                    <table class="table table-responsive table-striped table-bordered border-light" style="width:100% !important" id="datatable_history">
+                    <table class="table table-responsive table-striped table-bordered border-light table_history" style="width:100% !important" id="datatable_history">
                         <thead style="background-color:#b0d12a !important;font-size:16px;width:100% !important">
                           <tr>
                             <th scope="col">Web Name</th>
