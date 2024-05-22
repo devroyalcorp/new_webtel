@@ -17,18 +17,38 @@
             cursor: default !important;
             color:#000;
         }
-        /* .table_history.dataTable {
-            width: 100% !important;
-        } */
+        .table-responsive::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+
+        .table-responsive::-webkit-scrollbar:vertical {
+            width: 12px;
+        }
+
+        .table-responsive::-webkit-scrollbar:horizontal {
+            height: 12px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: #fff;
+            border-radius: 10px;
+            border: 2px solid #ffffff;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            border-radius: 10px;  
+            background-color: #ffffff; 
+        }
 
     .tltp {
         position: relative !important;
         display: inline-block !important;
+        width: 25px !important;
       }
 
       .tltp .tltptext {
         visibility: hidden !important;
-        width: 140px !important;
+        width: 100px !important;
         background-color: #555 !important;
         color: #fff !important;
         text-align: center !important;
@@ -273,7 +293,13 @@
                         if(data == null || data == ""){
                             return "-";
                         }else{
-                            return data + `<br><div class="tltp"><span class="tltptext" id="mytltp_${row.employee_id}">Copy to clipboard</span><button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})"><i class="fa fa-copy" aria-hidden="true"></i></button></div>`;
+                            return data + 
+                                    `<div class="tltp">
+                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy to clipboard</span>
+                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})">
+                                            <i class="fa fa-copy" aria-hidden="true"></i>
+                                        </button>
+                                    </div>`;
                         }
                     }
                 },
