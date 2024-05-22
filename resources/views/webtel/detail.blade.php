@@ -14,9 +14,9 @@
             cursor: default !important;
             color:#000;
         }
-        /* table.dataTable {
+        #datatable_history table.dataTable {
             width: 100% !important;
-        } */
+        }
 
     .tltp {
         position: relative !important;
