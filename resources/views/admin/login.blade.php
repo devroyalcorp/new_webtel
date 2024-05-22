@@ -9,6 +9,24 @@
         .content-wrapper{
             height:100%;
         }
+        .logo-img-header{
+            display:none !important;
+        }
+        .back-button-hide{
+            display:block !important;
+        }
+
+        .login-button-hide{
+            display:none !important;
+        }
+
+        .navbar-check{
+            padding: 14px 20px 14px 20px !important;
+        }
+
+        .navbar-brand{
+            margin-left: 1rem;
+        }
 
         @media (min-width: 920px) {
             .container-fluid{
@@ -35,7 +53,7 @@
                         {{ csrf_field() }}
                         <div class="mb-3 d-grid align-items-center justify-content-center">
                             <img src="{{ asset('img/logo-royalcorp.png') }}" class="mx-auto rounded rounded-circle shadow" alt="royal" width="75">
-                            <h4 class="text-uppercase mt-2">PT ROYAL ABADI SEJAHTERA</h4>
+                            <h4 class="text-uppercase mt-2">ROYAL CORPORATION</h4>
                         </div>
 
                         <div class="heading mb-2">
