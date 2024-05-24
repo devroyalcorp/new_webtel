@@ -27,11 +27,11 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        try {
+        // try {
             $ldapUser = LdapUser::findByOrFail('samaccountname', $data['username']);
 
             if($ldapUser){
-                // dd($this->connection->auth()->attempt($ldapUser->getDn(), $data['password']));
+
                 if ($this->connection->auth()->attempt($ldapUser->getDn(), $data['password'])) {
 
                     $get_user = User::select('users.*','job_details.company_id')
@@ -51,9 +51,9 @@ class UserController extends Controller
             }else{
                 return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!!', 'type' => 'error']);
             }
-        } catch (\Throwable $th) {
-            return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!', 'type' => 'error']);
-        }
+        // } catch (\Throwable $th) {
+            // return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!', 'type' => 'error']);
+        // }
     }
 
     public function logout()
