@@ -54,12 +54,17 @@ class UserController extends Controller
                 return response()->json(['status' => 500, 'msg' => "Wrong Username or Password!", 'title' => 'Login Failed!!', 'type' => 'error']);
             }
         } catch (\Throwable $th) {
-            $message = $th->getMessage();
-            Log::error("Login failed: ", [
-                $message,
-                $data['username'],
-            ]);
-            return response()->json(['status' => 500, 'msg' => $data['username'].' = '.$message, 'title' => 'Login Failed!', 'type' => 'error']);
+            if (config('app.env') !== 'production') {
+                $message = $th->getMessage();
+                Log::error("Login failed: ", [
+                    $data['username'].': '.$message,
+                    $data['username'],
+                ]);
+            }else{
+                $message = "Something went wrong!";
+            }
+
+            return response()->json(['status' => 500, 'msg' => $message, 'title' => 'Login Failed!', 'type' => 'error']);
         }
     }
 
