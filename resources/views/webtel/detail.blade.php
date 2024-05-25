@@ -126,7 +126,7 @@
             // button_copied.removeAttribute('title');
             // button_copied.setAttribute('title', 'Copy to clipboard!');
             var tltp = document.getElementById("mytltp_"+id);
-            tltp.innerHTML = "Copy email to Clipboard";
+            tltp.innerHTML = "Copy email to clipboard";
             button_copied.removeAttribute('style');
         }, 2000);
     }
