@@ -26,7 +26,6 @@
         <div class="col-md-12 text-center" style="margin-top:10px;">
             <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
         </div>
-    </div>
     <div class="row justify-content-evenly" style="margin-top:20px">
         @foreach($data_companies as $key=>$v)
             <?php
@@ -56,6 +55,8 @@
             <p class="text-center" style="font-size:30px;font-weight:bolder;margin-top:20px">{{$v['name']}}</p>
         </div>
         @endforeach
+    </div>
+
     </div>
 </div>
 @endsection

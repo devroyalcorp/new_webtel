@@ -2,108 +2,33 @@
 @section('title')
     <title>Webtel</title>
 @endsection
-@section('style')
-    <style>
-        .dt-scroll-headInner{
-            width:100% !important;
-        }
-        table.dataTable{
-            width:100% !important;
-        }
-        .input_copied{
-            border: none !important;
-            box-shadow: none !important;
-            background-color: white !important;
-            cursor: default !important;
-            color:#000;
-        }
-        .table-responsive::-webkit-scrollbar {
-            -webkit-appearance: none;
-        }
-
-        .table-responsive::-webkit-scrollbar:vertical {
-            width: 12px;
-        }
-
-        .table-responsive::-webkit-scrollbar:horizontal {
-            height: 12px;
-        }
-
-        .table-responsive::-webkit-scrollbar-thumb {
-            background-color: #fff;
-            border-radius: 10px;
-            border: 2px solid #ffffff;
-        }
-
-        .table-responsive::-webkit-scrollbar-track {
-            border-radius: 10px;  
-            background-color: #ffffff; 
-        }
-
-    .tltp {
-        position: relative !important;
-        display: inline-block !important;
-        width: 25px !important;
-      }
-
-      .tltp .tltptext {
-        visibility: hidden !important;
-        width: 100px !important;
-        background-color: #555 !important;
-        color: #fff !important;
-        text-align: center !important;
-        border-radius: 6px !important;
-        padding: 5px !important;
-        position: absolute !important;
-        z-index: 1 !important !important;
-        bottom: 100% !important;
-        left: 50% !important !important;
-        margin-left: -30px !important;
-        opacity: 0 !important;
-        transition: opacity 0.3s !important;
-      }
-
-      .tltp .tltptext::after {
-        content: "" !important;
-        position: absolute !important;
-        top: 100% !important;
-        left: 50% !important;
-        margin-left: -5px !important;
-        border-width: 5px !important;
-        border-style: solid !important;
-        border-color: #555 transparent transparent transparent !important;
-      }
-
-      .tltp:hover .tltptext {
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-
-    </style>
-@endsection
 
 @section('content')
     <div class="container-fluid" style="margin-top:15px;">
         <div class="row">
-            <div class="col-md-12 text-center" style="margin-top:4rem;margin-bottom:4rem;">
-                <p style="margin: 1px 1px 1px 0px !important;font-size:40px;font-weight: bolder;color: #6c757d;">{{Session::get('name_company') ?? ""}}</p>
+          <div class="col-12 text-center my-4">
+            <p class="m-0" style="font-size: 40px; font-weight: bolder; color: #001f3f; font-family: 'Roboto', serif;">
+                {{ Session::get('name_company') ?? "" }}
+            </p>
+          </div>
+          <div class="col-12 d-flex justify-content-center">  
+            <div class="table-responsive" style="width: 90%;">  
+                <table class="table table-striped table-bordered border-light table-hover mx-auto" id="datatable_webtel">
+                    <thead class="custom-header">
+                        <tr>
+                            <th scope="col">Company</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Extension</th>
+                            <th scope="col">Email</th>
+                            @if(Session::get('login_status'))
+                                <th scope="col">Action</th>
+                            @endif
+                        </tr>
+                    </thead>
+                </table>
             </div>
-        </div>
-        <div class="table-responsive">  
-            <table class="table table-striped table-bordered border-light table-hover" id="datatable_webtel">
-                <thead style="background-color:#b0d12a !important;font-size:18px;">
-                <tr>
-                    <th scope="col">Company</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Extention</th>
-                    <th scope="col">Email</th>
-                    @if(Session::get('login_status'))
-                        <th scope="col">Action</th>
-                    @endif
-                </tr>
-                </thead>
-            </table>
+          </div>
         </div>
 
         <!-- Modal Update -->
@@ -193,7 +118,7 @@
         const button_copied = document.getElementById('button_'+id);
 
         var tltp = document.getElementById("mytltp_"+id);
-        tltp.innerHTML = "Copied";
+        tltp.innerHTML = "Copied!";
 
         // button_copied.setAttribute('title', 'Copied!');
         button_copied.setAttribute("style","color:red");
@@ -201,7 +126,7 @@
             // button_copied.removeAttribute('title');
             // button_copied.setAttribute('title', 'Copy to clipboard!');
             var tltp = document.getElementById("mytltp_"+id);
-            tltp.innerHTML = "Copy to Clipboard";
+            tltp.innerHTML = "Copy email to Clipboard";
             button_copied.removeAttribute('style');
         }, 2000);
     }
@@ -246,7 +171,7 @@
                 } ],
             @endif
             ajax: '/webtel/datatables/'+id_company,
-            pagingType: "full_numbers",
+            pagingType: "simple_numbers",
             dom: "<'row w100'<'col-sm-6 end'B>> <'row w100'<'col-sm-12'tr>><'row mt-2 w100'<'col-sm-4 'l><'col-sm-5'p><'col-sm-3'i>>",
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             columns: [
@@ -295,7 +220,7 @@
                         }else{
                             return data + 
                                     `<div class="tltp">
-                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy to clipboard</span>
+                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
                                         <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})">
                                             <i class="fa fa-copy" aria-hidden="true"></i>
                                         </button>
@@ -304,15 +229,19 @@
                     }
                 },
                 @if(Session::get('login_status'))
-                    { 
-                        data: 'employee_id',
-                        render: function ( data, type, row ) {
-                            return `<div class="btn-group" role="group" aria-label="action">
-                                    <a type="button" class="btn btn-primary btn-sm" onclick="UpdateEmployee(${data})"><i class="fas fa-edit icon_plus"></i>Edit</a>
-                                    <a type="button" class="btn btn-info btn-sm ms-1" onclick="ReadLogHistory(${row.id})"><i class="fas fa-history icon_plus"></i>History</a>
-                                    </div>`;
-                        }
-                    },
+                {
+                    data: 'employee_id',
+                    render: function (data, type, row) {
+                        return `<div class="btn-group" role="group" aria-label="action">
+                                    <span class="text-secondary me-2" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
+                                        <i class="fas fa-pen icon_plus"></i>
+                                    </span>
+                                    <span class="text-secondary" role="button" onclick="ReadLogHistory(${row.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
+                                        <i class="fas fa-history icon_plus"></i>
+                                    </span>
+                                </div>`;
+                    }
+                },
                 @endif
             ]
         });

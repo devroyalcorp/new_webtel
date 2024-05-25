@@ -16,7 +16,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('bootstrap5/css/bootstrap.min.css')}}" rel="stylesheet"">
-
+    
+    <!-- custom css -->
+    <link href="{{ asset('css/custom-detail.css') }}" rel="stylesheet">
 
     {{-- datatables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
@@ -24,6 +26,8 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css" /> --}}
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
       html,body,.wrapper{
