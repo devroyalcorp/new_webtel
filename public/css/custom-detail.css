@@ -1,3 +1,22 @@
+@media (min-width: 768px) {
+    footer{
+        margin-top: -4rem !important;
+    }
+}
+
+.blockquote-footer {
+    margin-bottom: 0 !important;
+    margin-top: -3rem !important;
+}
+figure {
+    margin: 0 0 0 !important;
+    width:100px !important;
+}
+
+.blockquote-footer::before {
+    content: none !important;
+}
+
 .custom-header {
     background-color: #d1e7dd; /* Light teal */
     font-size: 18px;

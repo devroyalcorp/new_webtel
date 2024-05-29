@@ -1,6 +1,4 @@
   <!-- Main Footer -->
-  <footer style="text-align:center;position:fixed;bottom:0;background-color:gray;">
-    <!-- To the right -->
-    <!-- Default to the left -->
-    <strong>Copyright IT 2024 &copy; RAS.</strong>
-  </footer>
+    <footer class="bottom-0 start-50" style="bottom:0;">
+      <p class="text-center" style="font-size:13px;"><strong>Copyright &copy; 2024 Royal Corporation. All Right Reserved</strong></p>
+    </footer>

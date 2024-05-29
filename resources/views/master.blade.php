@@ -47,10 +47,12 @@
       <div class="container-fluid">
         @yield('content')
       </div><!-- /.container-fluid -->
-    <!-- /.content-header -->
+      <div class="content-footer">
+        <!-- /.content-footer -->
+        @include('template.footer')
+      </div>
   </div>
-  <!-- /.content-footer -->
-  {{-- @include('template.footer') --}}
+
 </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper Datatables Debounce-->
