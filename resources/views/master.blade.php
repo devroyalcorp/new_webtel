@@ -52,7 +52,6 @@
         @include('template.footer')
       </div>
   </div>
-
 </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper Datatables Debounce-->

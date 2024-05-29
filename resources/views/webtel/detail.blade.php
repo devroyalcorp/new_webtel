@@ -4,8 +4,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid" style="margin-top:15px;">
-        <div class="row">
+        <div class="row" style="margin-top:15px;">
           <div class="col-12 text-center my-4">
             <p class="m-0" style="font-size: 40px; font-weight: bolder; color: #001f3f; font-family: 'Roboto', serif;">
                 {{ Session::get('name_company') ?? "" }}
@@ -21,9 +20,7 @@
                             <th scope="col">Department</th>
                             <th scope="col">Extension</th>
                             <th scope="col">Email</th>
-                            @if(Session::get('login_status'))
-                                <th scope="col">Action</th>
-                            @endif
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -97,7 +94,6 @@
             </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @section('script')
@@ -218,31 +214,38 @@
                         if(data == null || data == ""){
                             return "-";
                         }else{
-                            return data + 
-                                    `<div class="tltp">
-                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
-                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${data}', ${row.employee_id})">
-                                            <i class="fa fa-copy" aria-hidden="true"></i>
-                                        </button>
-                                    </div>`;
+                            return data;
                         }
                     }
                 },
-                @if(Session::get('login_status'))
                 {
                     data: 'employee_id',
                     render: function (data, type, row) {
+                    @if(Session::get('login_status'))
                         return `<div class="btn-group" role="group" aria-label="action">
-                                    <span class="text-secondary me-2" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
+                                    <div class="tltp">
+                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
+                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${row.work_email}', ${row.employee_id})">
+                                            <i class="fa fa-copy text-secondary" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <span class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                                         <i class="fas fa-pen icon_plus"></i>
                                     </span>
-                                    <span class="text-secondary" role="button" onclick="ReadLogHistory(${row.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
+                                    <span class="text-secondary" style="margin-top: 0.4rem !important;" role="button" onclick="ReadLogHistory(${row.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
                                         <i class="fas fa-history icon_plus"></i>
                                     </span>
                                 </div>`;
+                    @else   
+                        return `<div class="tltp">
+                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
+                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${row.work_email}', ${row.employee_id})">
+                                            <i class="fa fa-copy" aria-hidden="true"></i>
+                                        </button>
+                                    </div>`;
+                    @endif
                     }
                 },
-                @endif
             ]
         });
         

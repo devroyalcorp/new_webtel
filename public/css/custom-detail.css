@@ -1,7 +1,12 @@
-@media (min-width: 768px) {
-    footer{
-        margin-top: -4rem !important;
-    }
+
+.content-wrapper {
+    height: 100%;
+}
+.content-footer{
+    position: relative;
+    bottom: 0; 
+    left: 0; 
+    right: 0;
 }
 
 .blockquote-footer {
@@ -61,7 +66,7 @@ table.dataTable{
 
 .tltp .tltptext {
     visibility: hidden;
-    width: 130px; /* Adjust width as needed */
+    width: 80px; /* Adjust width as needed */
     background-color: #333; /* Background color */
     color: #fff; /* Text color */
     text-align: center;
