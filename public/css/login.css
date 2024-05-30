@@ -518,6 +518,3 @@ input:valid ~ .show-hide i {
     object-fit: cover;
     width: 100%;
 }
-small{
-    margin-left: 1rem !important;
-}

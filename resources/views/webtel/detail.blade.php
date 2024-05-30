@@ -191,22 +191,7 @@
                     data: 'name',
                 },
                 { 
-                    data: 'line_number',
-                    render: function ( data, type, row ) {
-                        if(data == null || data == ""){
-                            if(row.extention_number == null || row.extention_number == ""){
-                                return "(-) "+ " - ";
-                            }else{
-                                return "(-) "+row.extention_number;
-                            }
-                        }else{
-                            if(row.extention_number == null || row.extention_number == ""){
-                                return "("+data+") "+ " - ";
-                            }else{
-                                return "("+data+") "+row.extention_number;
-                            }
-                        }
-                    }
+                    data: 'full_extention_number',
                 },
                 { 
                     data: 'work_email',

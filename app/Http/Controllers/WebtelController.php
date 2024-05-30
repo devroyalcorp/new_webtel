@@ -55,12 +55,36 @@ class WebtelController extends Controller
 
         return DataTables::of($data_companies)
         ->addIndexColumn()
+        ->addColumn('full_extention_number', function($data_companies) {
+            if($data_companies['line_number'] == null || $data_companies['line_number'] == ""){
+                if($data_companies['extention_number'] == null || $data_companies['extention_number'] == ""){
+                    return "(-) ".$this->randomNumber();
+                }else{
+                    return "(-) ".$data_companies['extention_number'];
+                }
+            }else{
+                if($data_companies['extention_number'] == null || $data_companies['extention_number'] == ""){
+                    return "(".$data_companies['line_number'].") ".$this->randomNumber();
+                }else{
+                    return "(".$data_companies['line_number'].") ".$data_companies['extention_number'];
+                }
+            }
+        })
         ->make(true);
     }
 
 
     public function create(){
 
+    }
+
+    function randomNumber() {
+        $length = 3;
+        $result = '';
+        for($i = 0; $i < $length; $i++) {
+            $result .= mt_rand(0, 9);
+        }
+        return $result;
     }
 
     public function get_employee_webtel($id){

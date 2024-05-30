@@ -33,6 +33,30 @@
       html,body,.wrapper{
         height:100%;
       }
+
+      .content-wrapper {
+          height: 100%;
+      }
+      .content-footer{
+          position: relative;
+          bottom: 0; 
+          left: 0; 
+          right: 0;
+      }
+
+      .blockquote-footer {
+          margin-bottom: 0 !important;
+          margin-top: -3rem !important;
+          width: fit-content !important;
+      }
+      figure {
+          margin: 0 0 0 !important;
+          width:100px !important;
+      }
+
+      .blockquote-footer::before {
+          content: none !important;
+      }
     </style>
 </head>
 @yield('style')

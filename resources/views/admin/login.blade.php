@@ -41,6 +41,10 @@
                 padding-top:3rem;
             }
         }
+
+        small{
+            margin-left: 1rem !important;
+        }
     </style>
 @endsection
 @section('content')
