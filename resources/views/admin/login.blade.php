@@ -5,10 +5,6 @@
 @section('style')
     <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
     <style>
-
-        small{
-            padding-left: 1.7rem !important;
-        }
         .content-wrapper{
             height:100%;
         }

@@ -12,6 +12,7 @@
 .blockquote-footer {
     margin-bottom: 0 !important;
     margin-top: -3rem !important;
+    width: fit-content !important;
 }
 figure {
     margin: 0 0 0 !important;

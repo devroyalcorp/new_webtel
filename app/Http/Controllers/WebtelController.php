@@ -36,6 +36,7 @@ class WebtelController extends Controller
             ->whereIn('job_details.company_id',$ids_company)
             ->where('employees.active', true)
             ->where('employees.is_internal', true)
+            ->where('job_details.is_private', false)
             ->where($where)
             ->get();
 
@@ -47,6 +48,7 @@ class WebtelController extends Controller
             ->where('job_details.company_id',$id)
             ->where('employees.active', true)
             ->where('employees.is_internal', true)
+            ->where('job_details.is_private', false)
             ->where($where)
             ->get();
         }
@@ -65,6 +67,7 @@ class WebtelController extends Controller
         $data = JobDetails::select('job_details.*', 'employees.first_name', 'employees.last_name')
                 ->leftjoin('employees', 'employees.id','=','job_details.employee_id')
                 ->where('job_details.employee_id',$id)
+                ->where('job_details.is_private', false)
                 ->first();
 
         if($data){
@@ -76,7 +79,7 @@ class WebtelController extends Controller
 
     public function update(Request $request){
         $data = $request->all();
-        $updated_jobdetails = JobDetails::where('employee_id',$data['employee_id'])->first();
+        $updated_jobdetails = JobDetails::where('employee_id',$data['employee_id'])->where('is_private', false)->first();
         
         $updated_jobdetails->line_number = $data['line_number'];
         $updated_jobdetails->extention_number = $data['extention_number'];

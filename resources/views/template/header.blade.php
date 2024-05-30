@@ -8,7 +8,14 @@
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top logo-img-header">
                 </a>
-                <span><a class="navbar-brand" style="font-size: 22px; font-weight: bolder;" href="#">Webtel</a></span>
+                <figure>
+                    <blockquote class="blockquote">
+                        <a class="navbar-brand" style="font-size: 22px; font-weight: bolder;" href="{{route('webtel.index')}}">Webtel</a>
+                    </blockquote>
+                    <figcaption class="blockquote-footer text-end">
+                        <a class="navbar-brand text-muted" style="font-size:15px;" href="{{route('webtel.index')}}"><br><small style="padding-left: 0.8rem !important;">version 2.0</small></a>
+                    </figcaption>
+                </figure>
             @else
                 <a class="navbar-brand" href="{{route('webtel.index')}}">
                     <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top logo-img-header">
@@ -18,7 +25,7 @@
                         <a class="navbar-brand" style="font-size: 22px; font-weight: bolder;" href="{{route('webtel.index')}}">Webtel</a>
                     </blockquote>
                     <figcaption class="blockquote-footer text-end">
-                        <a class="navbar-brand text-muted" style="font-size:15px;" href="{{route('webtel.index')}}"><br><small>version 2.0</small></a>
+                        <a class="navbar-brand text-muted" style="font-size:15px;" href="{{route('webtel.index')}}"><br><small style="padding-left: 0.8rem !important;">version 2.0</small></a>
                     </figcaption>
                   </figure>
             @endif

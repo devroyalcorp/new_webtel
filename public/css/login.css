@@ -7,6 +7,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body,
 input {
     font-family: "Poppins", sans-serif;
@@ -516,4 +517,7 @@ input:valid ~ .show-hide i {
     height: 275px;
     object-fit: cover;
     width: 100%;
+}
+small{
+    margin-left: 1rem !important;
 }
