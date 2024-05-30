@@ -100,7 +100,11 @@ class WebtelController extends Controller
         $id_company = $id;
         $data_companies = Companies::find($id_company);
 
-        Session::put('name_company', $data_companies['name']);
+        if($data_companies){
+            Session::put('name_company', $data_companies['name']);
+        }else{
+            return redirect()->route('webtel.index')->with('alert', 'The Company Is not Found!');
+        }
         return view('webtel.detail',compact('data_companies','id_company'));
     }
 
