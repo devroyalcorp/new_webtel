@@ -70,6 +70,10 @@ class WebtelController extends Controller
                 }
             }
         })
+        ->addColumn('full_name', function($data_companies) {
+            $full_name = ($data_companies['first_name'] ?? "")." ".($data_companies['last_name'] ?? "");
+            return $full_name;
+        })
         ->make(true);
     }
 

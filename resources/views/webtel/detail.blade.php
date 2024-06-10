@@ -175,17 +175,7 @@
                     data: 'acronym',
                 },
                 { 
-                    data: 'first_name',
-                    render: function ( data, type, row ) { 
-                        if(data == null){
-                            data = "";
-                        }
-
-                        if(row.last_name == null){
-                            row.last_name = "";
-                        }
-                        return data +" "+row.last_name;
-                    }
+                    data: 'full_name',
                 },
                 { 
                     data: 'name',
