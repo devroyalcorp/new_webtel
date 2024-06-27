@@ -36,13 +36,14 @@ class UserController extends Controller
 
                 if ($this->connection->auth()->attempt($ldapUser->getDn(), $data['password'])) {
 
-                    $get_user = User::select('users.*','job_details.company_id')
+                    $get_user = User::select('users.*','job_details.company_id','job_details.department_id')
                     ->where('username', $ldapUser['samaccountname'])
                     ->leftjoin('job_details', 'job_details.employee_id','=', 'users.employee_id')->first()->toArray();
 
                     $data_companies = Companies::find($get_user['company_id']);
                     
                     Session::put('users_session', $get_user['id']);
+                    Session::put('user_session_details', $get_user);
                     Session::put('login_status', true);
                     Session::forget('name_company');
     

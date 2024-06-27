@@ -20,7 +20,9 @@
                             <th scope="col">Department</th>
                             <th scope="col">Extension</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Action</th>
+                            @if(Session::get('login_status'))
+                                <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                 </table>
@@ -94,6 +96,21 @@
             </div>
             </div>
         </div>
+
+            <!-- Modal Emails -->
+            <div class="modal fade" id="modal_emails" tabindex="-1" aria-labelledby="modal_emails" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" style="" id="modal_emails_title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modal-body-email">
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
 @endsection
 
 @section('script')
@@ -101,31 +118,6 @@
     let id_company = {{$id_company ?? null}};
     let table;
     let table_histories;
-      
-    function copyToClipboard(textToCopy, id){
-
-        var input = document.createElement("input");
-        document.body.appendChild(input);
-        input.value = textToCopy;
-        input.select();
-        document.execCommand("Copy");
-        input.remove();
-
-        const button_copied = document.getElementById('button_'+id);
-
-        var tltp = document.getElementById("mytltp_"+id);
-        tltp.innerHTML = "Copied!";
-
-        // button_copied.setAttribute('title', 'Copied!');
-        button_copied.setAttribute("style","color:red");
-        setTimeout(() => {
-            // button_copied.removeAttribute('title');
-            // button_copied.setAttribute('title', 'Copy to clipboard!');
-            var tltp = document.getElementById("mytltp_"+id);
-            tltp.innerHTML = "Copy email to clipboard";
-            button_copied.removeAttribute('style');
-        }, 2000);
-    }
 
     $(document).ready(function () {
         $('#datatable_webtel').DataTable().destroy();
@@ -184,26 +176,20 @@
                     data: 'full_extention_number',
                 },
                 { 
-                    data: 'work_email',
+                    data: 'employee_id',
                     render: function ( data, type, row ) {
-                        if(data == null || data == ""){
-                            return "-";
-                        }else{
-                            return data;
-                        }
+                        return `<div class="btn-group" role="group" aria-label="action">
+                                    <a class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="ShowEmails(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Emails">
+                                        See All Emails...
+                                    </a>
+                                </div>`;
                     }
                 },
+                @if(Session::get('login_status'))
                 {
                     data: 'employee_id',
                     render: function (data, type, row) {
-                    @if(Session::get('login_status'))
                         return `<div class="btn-group" role="group" aria-label="action">
-                                    <div class="tltp">
-                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
-                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${row.work_email}', ${row.employee_id})">
-                                            <i class="fa fa-copy text-secondary" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
                                     <span class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                                         <i class="fas fa-pen icon_plus"></i>
                                     </span>
@@ -211,16 +197,9 @@
                                         <i class="fas fa-history icon_plus"></i>
                                     </span>
                                 </div>`;
-                    @else   
-                        return `<div class="tltp">
-                                        <span class="tltptext" id="mytltp_${row.employee_id}">Copy email to clipboard</span>
-                                        <button type="button" class="btn ms-3" data-bs-toggle="tooltip" data-bs-placement="top" id="button_${row.employee_id}" onclick="copyToClipboard('${row.work_email}', ${row.employee_id})">
-                                            <i class="fa fa-copy" aria-hidden="true"></i>
-                                        </button>
-                                    </div>`;
-                    @endif
                     }
                 },
+                @endif
             ]
         });
         
@@ -296,6 +275,100 @@
         });
     }
 
+    function ShowEmails(id){
+
+        $.ajax({
+            url: `/webtel/showEmails/`+id,
+            type: "GET",
+            cache: false,
+            success:function(response){
+                var data = response.data;
+                let html = '';
+                if (response.status == 202) {
+                    html += `<ul class="list-group">`;
+                    data.emails.forEach((value,index)=>{
+                        html += `<li class="list-group-item d-flex justify-content-between align-items-center">`
+                        html += `<input style="width:350px;border: none;border-color: transparent;" class="inputercopy" id="inputer_${data.employee_id}_${index}" value="${value}" disabled/ >`
+                        if(index == 0){
+                            html += `<i class="fas fa-star icon_plus"></i>`
+                            html += `<div class="btn-group" role="group" aria-label="action">`
+                        }else{
+                            html += `<div class="btn-group" role="group" aria-label="action">
+                            <button type="button" class="btn ms-3 text-primary" style="border:1px solid blue;" title="Set Primary Email" id="button_set" data-email="${value}" data-id="${data.employee_id}" ">
+                                    Set Primary
+                            </button>`
+                        }
+                        html += `
+                                <div class="tltp">
+                                    <span class="tltptext" id="mytltp_${data.employee_id}_${index}">Copy email to clipboard</span>
+                                    <button type="button" class="btn ms-3 text-dark" style="border:1px solid gray" data-bs-toggle="tooltip" data-bs-placement="top" id="button_copy" data-email="${value}" data-id="${data.employee_id}_${index}" ">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </li>`;
+                    })
+                    html +=`</ul>`;
+                    $('#modal-body-email').html(html);
+                    $('#modal_emails_title').text('Employee Emails')
+                    $('#modal_emails').modal('show')
+
+                }else{
+                    $('#modal_emails').modal('hide')
+                    toastr.info("Employee dont have log history !", "Warning!")
+                }
+            },
+            error:function(response){
+                // console.log(response.data)
+                toastr.error(response.msg, response.title)
+                table.draw();
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        $('body').on('click', '#button_copy', function() {
+            const id = $(this).attr('data-id');
+            const email = $(this).attr('data-email');
+            copyToClipboard(email, id);
+        });
+
+        $('body').on('click', '#button_set', function() {
+            const employee_id = $(this).attr('data-id');
+            const email = $(this).attr('data-email');
+            setEmails(email, employee_id);
+        });
+    });
+
+    function setEmails(email, employee_id){
+        console.log(email, employee_id)
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+            },
+            url: "{{ route('webtel.set_primary_emails') }}",
+            method: 'POST',
+            data: {
+                'employee_id' : employee_id,
+                'email' : email,
+            },
+            success:function(response){
+                var data = response.data
+                if (response.status == 202) {
+                    toastr.success(response.msg, response.title)
+
+                    ShowEmails(data.employee_id)
+                }else{
+                    toastr.info(response.msg, response.title)
+                }
+            },
+            error:function(response){
+                // console.log(response.data)
+                toastr.error(response.msg, response.title)
+            }
+        });
+    }
+
     function datatableHistory(id, name){
 
         table_histories = $('#datatable_history').DataTable({
@@ -339,6 +412,24 @@
 
         table_histories.columns.adjust();
         $('#modal_histories').trigger('resize')
+    }
+
+    function copyToClipboard(textToCopy, id){
+
+        var input = document.getElementById("inputer_"+id);
+        input.value;
+        console.log(input.value);
+        input.disabled = false;
+        input.select();
+        document.execCommand("Copy");
+        input.disabled = true;
+        var tltp = document.getElementById("mytltp_"+id);
+        tltp.innerHTML = "Copied!";
+
+        setTimeout(() => {
+            var tltp = document.getElementById("mytltp_"+id);
+            tltp.innerHTML = "Copy email to clipboard";
+        }, 5000);
     }
 
     $("#form_update").submit(function(e) {

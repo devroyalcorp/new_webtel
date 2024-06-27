@@ -38,6 +38,8 @@ Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])
 Route::get('/webtel/datatables/{id}', [WebtelController::class, 'datatables_webtel'])->name('webtel.datatables');
 Route::get('/webtel/get_employee_webtel/{id}', [WebtelController::class, 'get_employee_webtel'])->name('webtel.get_employee_webtel');
 Route::post('/webtel/update_webtel', [WebtelController::class, 'update'])->name('webtel.update');
+Route::post('/webtel/set_primary_emails', [WebtelController::class, 'set_primary_emails'])->name('webtel.set_primary_emails');
+Route::get('/webtel/showEmails/{id}', [WebtelController::class, 'showEmails'])->name('webtel.showEmails');
 
 // for log
 Route::get('/webtel/datatables_loghistory/{id}', [LoghistoriesController::class, 'datatables_loghistory'])->name('webtel.datatables_loghistory');

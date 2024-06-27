@@ -1,23 +1,25 @@
-
-
 .custom-header {
     background-color: #d1e7dd; /* Light teal */
     font-size: 18px;
     color: #333; /* Darker text for good contrast */
 }
 
-.dt-scroll-headInner{
-    width:100% !important;
+.inputercopy::selection {
+    background: transparent;
 }
-table.dataTable{
-    width:100% !important;
+
+.dt-scroll-headInner {
+    width: 100% !important;
 }
-.input_copied{
+table.dataTable {
+    width: 100% !important;
+}
+.input_copied {
     border: none !important;
     box-shadow: none !important;
     background-color: white !important;
     cursor: default !important;
-    color:#000;
+    color: #000;
 }
 .table-responsive::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -34,8 +36,8 @@ table.dataTable{
     border: 2px solid #ffffff;
 }
 .table-responsive::-webkit-scrollbar-track {
-    border-radius: 10px;  
-    background-color: #ffffff; 
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 .tltp {
     position: relative;

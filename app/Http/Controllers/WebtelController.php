@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Companies;
 use App\Models\JobDetails;
+use App\Models\EmployeeMails;
 use App\Models\LogHistories;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
@@ -164,5 +165,46 @@ class WebtelController extends Controller
             'old_data' => $old_data,
             'created_at' => date('Y-m-d H:i:s.u')
         ]); 
+    }
+
+    public function showEmails($employee_id){
+            $employeeEmails = EmployeeMails::where('employee_id',$employee_id)->first();
+
+            if($employeeEmails){
+                $employeeEmails = $employeeEmails->toArray();
+                $dataEmails = [];
+                foreach($employeeEmails as $key=>$val){
+                    if(str_contains($key,"email")){
+                        if(isset($val)){
+                            $dataEmails['emails'][]=$val;
+                        }
+                    }
+                }
+                $dataEmails['employee_id'] = $employee_id;
+                return response()->json(['status' => 202, 'msg' => "Employee have emails !", 'title' => 'Success!', 'type' => 'success', 'data' => $dataEmails]);
+            }else{
+                return response()->json(['status' => 500, 'msg' => "Employee dont have emails!", 'title' => 'Failed!', 'type' => 'warning']);
+            }
+    }
+
+    public function set_primary_emails(Request $request){
+        $data = $request->all();
+        $EmployeeEmails = EmployeeMails::where('employee_id',$data['employee_id'])->first();
+
+        if($EmployeeEmails){
+            $old_data =[
+                "old_primary_email" => $EmployeeEmails['primary_email'],
+            ];
+
+            $EmployeeEmails->primary_email = $data['email'];
+            $EmployeeEmails->update();
+
+            if($EmployeeEmails){
+                $this->createLog($EmployeeEmails['id'], Session::get('users_session'), $data['employee_id'], "UPDATE", 'webtel email', 'Web Telekomunikasi', $old_data);
+                return response()->json(['status' => 202,  'msg' => "Success Set Email to Primary !", 'title' => 'Failed!', 'type' => 'success', 'data' => $EmployeeEmails]);
+            }
+        }else{
+            return response()->json(['status' => 500,  'msg' => "Failed Set Email to Primary !", 'title' => 'Failed!', 'type' => 'error']);
+        }
     }
 }
