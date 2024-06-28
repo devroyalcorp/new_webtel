@@ -26,6 +26,13 @@ class WebtelController extends Controller
             $where = [
                 ['job_details.extention_number', '!=', null]
             ];
+        }else{
+            if($this->checkExistedSession('user_session_details') == true){
+                $userDetails = Session::get('user_session_details');
+                $where = [
+                    ['job_details.department_id', $userDetails['department_id']]
+                ];
+            }
         }
 
         if($id == 1){
