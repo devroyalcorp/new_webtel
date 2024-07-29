@@ -342,7 +342,6 @@
                         </li>`;
                     })
                     html +=`</ul>`;
-                    $('#modal_spinner').modal('hide')
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
                     $('#modal_emails').modal('show')
@@ -358,6 +357,9 @@
                 $('#modal_spinner').modal('hide')
                 toastr.error(response.msg, response.title)
                 table.draw();
+            },
+            complete: function () {
+                $('#modal_spinner').modal('hide');
             }
         });
     }
