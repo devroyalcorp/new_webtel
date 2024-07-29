@@ -310,7 +310,7 @@
         $.ajax({
             url: `/webtel/showEmails/`+id,
             type: "GET",
-            cache: false,
+            cache: true,
             beforeSend:function(response){
                 $('#modal_spinner').modal('show')
             },
@@ -342,9 +342,9 @@
                         </li>`;
                     })
                     html +=`</ul>`;
+                    $('#modal_spinner').modal('hide')
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
-                    $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('show')
 
                 }else{
