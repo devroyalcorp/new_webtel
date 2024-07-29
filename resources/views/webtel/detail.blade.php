@@ -97,20 +97,50 @@
             </div>
         </div>
 
-            <!-- Modal Emails -->
-            <div class="modal fade" id="modal_emails" tabindex="-1" aria-labelledby="modal_emails" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" style="" id="modal_emails_title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="modal-body-email">
-                        
-                    </div>
+        <!-- Modal Emails -->
+        <div class="modal fade" id="modal_emails" tabindex="-1" aria-labelledby="modal_emails" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" style="" id="modal_emails_title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body" id="modal-body-email">
+                    
                 </div>
             </div>
+            </div>
+        </div>
+
+        <!-- Modal Spinner -->
+        <div class="modal fade" id="modal_spinner" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modal_spinner" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center" id="modal-body-email">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                      <br>
+                      <h5>Please Wait
+                        <div class="spinner-grow" style="width: 0.3rem; height: 0.3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow" style="width: 0.3rem; height: 0.3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow" style="width: 0.3rem; height: 0.3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow" style="width: 0.3rem; height: 0.3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+            </div>
+        </div>
 @endsection
 
 @section('script')
@@ -281,6 +311,9 @@
             url: `/webtel/showEmails/`+id,
             type: "GET",
             cache: false,
+            beforeSend:function(response){
+                $('#modal_spinner').modal('show')
+            },
             success:function(response){
                 var data = response.data;
                 let html = '';
@@ -311,15 +344,18 @@
                     html +=`</ul>`;
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
+                    $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('show')
 
                 }else{
+                    $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('hide')
-                    toastr.info("Employee dont have log history !", "Warning!")
+                    toastr.info("Employee dont have emails !", "Warning!")
                 }
             },
             error:function(response){
                 // console.log(response.data)
+                $('#modal_spinner').modal('hide')
                 toastr.error(response.msg, response.title)
                 table.draw();
             }

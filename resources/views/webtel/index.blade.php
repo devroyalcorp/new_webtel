@@ -1,6 +1,6 @@
 @extends('master')
 @section('title')
-<title>Home</title>
+<title>Webtel</title>
 @endsection
 @section('style')
 <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
