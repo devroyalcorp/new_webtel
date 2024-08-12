@@ -345,7 +345,7 @@
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
                     $('#modal_emails').modal('show')
-
+                    toastr.success("", response.title)
                 }else{
                     $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('hide')
@@ -393,8 +393,6 @@
             success:function(response){
                 var data = response.data
                 if (response.status == 202) {
-                    toastr.success(response.msg, response.title)
-
                     ShowEmails(data.employee_id)
                 }else{
                     toastr.info(response.msg, response.title)

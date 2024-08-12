@@ -28,37 +28,51 @@ class WebtelController extends Controller
             ];
         }else{
             if($this->checkExistedSession('user_session_details') == true){
+
                 $userDetails = Session::get('user_session_details');
-                $where = [
-                    ['job_details.department_id', $userDetails['department_id']]
-                ];
+                if($userDetails['username'] != "admin.it"){
+                    $where = [
+                        ['job_details.department_id', $userDetails['department_id']]
+                    ];
+                }
             }
         }
-
-        if($id == 1){
-            $ids_company = [$id,5,6];
+        if(isset($userDetails) && $userDetails['username'] != "admin.it"){
             $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
             ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
-            ->whereIn('job_details.company_id',$ids_company)
             ->where('employees.active', true)
             ->where('employees.is_internal', true)
             ->where('job_details.is_private', false)
             ->where($where)
             ->get();
-
         }else{
-            $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
-            ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
-            ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
-            ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
-            ->where('job_details.company_id',$id)
-            ->where('employees.active', true)
-            ->where('employees.is_internal', true)
-            ->where('job_details.is_private', false)
-            ->where($where)
-            ->get();
+            if($id == 1){
+                $ids_company = [$id,5,6];
+                $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
+                ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
+                ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
+                ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
+                ->whereIn('job_details.company_id',$ids_company)
+                ->where('employees.active', true)
+                ->where('employees.is_internal', true)
+                ->where('job_details.is_private', false)
+                ->where($where)
+                ->get();
+
+            }else{
+                $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
+                ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
+                ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
+                ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')
+                ->where('job_details.company_id',$id)
+                ->where('employees.active', true)
+                ->where('employees.is_internal', true)
+                ->where('job_details.is_private', false)
+                ->where($where)
+                ->get();
+            }        
         }
 
         return DataTables::of($data_companies)
@@ -66,13 +80,13 @@ class WebtelController extends Controller
         ->addColumn('full_extention_number', function($data_companies) {
             if($data_companies['line_number'] == null || $data_companies['line_number'] == ""){
                 if($data_companies['extention_number'] == null || $data_companies['extention_number'] == ""){
-                    return "(-) ".$this->randomNumber();
+                    return "(-) "."-";
                 }else{
                     return "(-) ".$data_companies['extention_number'];
                 }
             }else{
                 if($data_companies['extention_number'] == null || $data_companies['extention_number'] == ""){
-                    return "(".$data_companies['line_number'].") ".$this->randomNumber();
+                    return "(".$data_companies['line_number'].") "."-";
                 }else{
                     return "(".$data_companies['line_number'].") ".$data_companies['extention_number'];
                 }
@@ -206,9 +220,19 @@ class WebtelController extends Controller
             $EmployeeEmails->primary_email = $data['email'];
             $EmployeeEmails->update();
 
-            if($EmployeeEmails){
-                $this->createLog($EmployeeEmails['id'], Session::get('users_session'), $data['employee_id'], "UPDATE", 'webtel email', 'Web Telekomunikasi', $old_data);
-                return response()->json(['status' => 202,  'msg' => "Success Set Email to Primary !", 'title' => 'Failed!', 'type' => 'success', 'data' => $EmployeeEmails]);
+            $job_details = JobDetails::where('employee_id',$data['employee_id'])->first();
+            if($EmployeeEmails && $job_details){
+                $job_details->work_email = $data['email'];
+                $job_details->update();
+
+                if($job_details){
+                    $this->createLog($EmployeeEmails['id'], Session::get('users_session'), $data['employee_id'], "UPDATE", 'webtel email', 'Web Telekomunikasi', $old_data);
+                    return response()->json(['status' => 202,  'msg' => "Success Set Email to Primary !", 'title' => 'Failed!', 'type' => 'success', 'data' => $EmployeeEmails]);
+                }else{
+                    return response()->json(['status' => 500,  'msg' => "Failed Set Email to Primary !", 'title' => 'Failed!', 'type' => 'error']);
+                }
+            }else{
+                return response()->json(['status' => 500,  'msg' => "Failed Set Email to Primary !", 'title' => 'Failed!', 'type' => 'error']);
             }
         }else{
             return response()->json(['status' => 500,  'msg' => "Failed Set Email to Primary !", 'title' => 'Failed!', 'type' => 'error']);

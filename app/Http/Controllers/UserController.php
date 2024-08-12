@@ -38,14 +38,20 @@ class UserController extends Controller
 
                     $get_user = User::select('users.*','job_details.company_id','job_details.department_id')
                     ->where('username', $ldapUser['samaccountname'])
-                    ->leftjoin('job_details', 'job_details.employee_id','=', 'users.employee_id')->first()->toArray();
+                    ->leftjoin('job_details', 'job_details.employee_id','=', 'users.employee_id')->first();
 
-                    $data_companies = Companies::find($get_user['company_id']);
+                    if($get_user){
+
+                        $get_user = $get_user->toArray();
+                        $data_companies = Companies::find($get_user['company_id']);
                     
-                    Session::put('users_session', $get_user['id']);
-                    Session::put('user_session_details', $get_user);
-                    Session::put('login_status', true);
-                    Session::forget('name_company');
+                        Session::put('users_session', $get_user['id']);
+                        Session::put('user_session_details', $get_user);
+                        Session::put('login_status', true);
+                        Session::forget('name_company');
+                    }else{
+                        return response()->json(['status' => 500, 'msg' => "There is no data user.", 'title' => 'Login Failed!!', 'type' => 'error']);
+                    }
     
                     return response()->json(['status' => 202, 'msg' => "Login Succesfully!", 'title' => 'Login Success!!', 'type' => 'success', 'data'=>$data_companies['id']]);
                 }else{

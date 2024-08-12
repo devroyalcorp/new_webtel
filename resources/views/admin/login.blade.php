@@ -85,12 +85,10 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="sign-btn mt-2 btn-login">
+                            <button type="submit" id="sign-btn-id" class="sign-btn mt-2 btn-login">
                                 Sign In
                             </button>
-
                         </div>
-
                     </form>
                 </div>
 
@@ -126,13 +124,13 @@
 
         $(document).ready(function () {
             var loading = function () {
-                $('.btn-simpan').attr('disabled', 'disabled')
-                $('.btn-simpan').val('Login...')
+                $('#sign-btn-id').attr('disabled', 'disabled')
+                $('#sign-btn-id').val('Processing...')
             }
 
             var loadingDone = function (response) {
-                $('.btn-simpan').removeAttr('disabled')
-                $('.btn-simpan').val('Simpan')
+                $('#sign-btn-id').removeAttr('disabled')
+                $('#sign-btn-id').val('Sign In')
             }
 
             $("#form_login").submit(function (e) {
@@ -149,10 +147,10 @@
                     contentType: false,
                     dataType: 'json',
                     beforeSend: function () {
-                        // loading()
+                        loading()
                     },
                     success: function (response) {
-                        // loadingDone()
+                        loadingDone()
                         if (response.status == 202) {
                             toastr.success(response.msg, response.title)
                             location.href = '/webtel/companies/'+response.data; 
@@ -164,7 +162,9 @@
                         loadingDone()
                         toastr.error(response.msg, response.title)
                     },
-                    complete: function (response) {}
+                    complete: function (response) {
+                        loadingDone()
+                    }
                 });
             });
 
