@@ -312,14 +312,14 @@
             type: "GET",
             cache: true,
             beforeSend:function(response){
-                $('#modal_spinner').modal('show')
+                // $('#modal_spinner').modal('show')
             },
             success:function(response){
                 var data = response.data;
                 let html = '';
-                $('#modal_spinner').hide()
+                // $('#modal_spinner').hide()
                 if (response.status == 202) {
-                    $('#modal_spinner').hide()
+                    // $('#modal_spinner').hide()
                     html += `<ul class="list-group">`;
                     data.emails.forEach((value,index)=>{
                         html += `<li class="list-group-item d-flex justify-content-between align-items-center">`
@@ -349,19 +349,19 @@
                     $('#modal_emails').modal('show')
                     toastr.success("", response.title)
                 }else{
-                    $('#modal_spinner').hide()
+                    // $('#modal_spinner').hide()
                     $('#modal_emails').modal('hide')
                     toastr.info("Employee dont have emails !", "Warning!")
                 }
             },
             error:function(response){
                 // console.log(response.data)
-                $('#modal_spinner').hide()
+                // $('#modal_spinner').hide()
                 toastr.error(response.msg, response.title)
                 table.draw();
             },
             complete: function () {
-                $('#modal_spinner').hide();
+                // $('#modal_spinner').hide();
             }
         });
     }
