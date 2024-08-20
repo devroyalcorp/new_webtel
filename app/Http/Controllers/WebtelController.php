@@ -37,7 +37,7 @@ class WebtelController extends Controller
                 }
             }
         }
-        if(isset($userDetails) && $userDetails['username'] != "admin.it"){
+        if(isset($userDetails) && ($userDetails['username'] != "admin.it" && $userDetails['username'] != "reynold")){
             $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
             ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
@@ -62,7 +62,7 @@ class WebtelController extends Controller
                 ->get();
 
             }else{
-                $data_companies= JobDetails::select('job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
+                $data_companies= JobDetails::select('job_details.id','job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
                 ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
                 ->leftJoin('departments', 'departments.id', '=', 'job_details.department_id')
                 ->leftJoin('companies', 'companies.id', '=', 'job_details.company_id')

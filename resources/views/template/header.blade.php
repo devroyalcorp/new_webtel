@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse navbar-check" id="navbarTogglerDemo01" style="padding: 0 20px; color: #32294B;">
-            @if(Session::get('login_status') == true && Session::get('user_session_details')['username'] != 'admin.it')
+            @if(Session::get('login_status') == true && (Session::get('user_session_details')['username'] !== 'admin.it' && Session::get('user_session_details')['username'] !== 'reynold'))
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top logo-img-header">
                 </a>

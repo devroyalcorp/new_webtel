@@ -344,6 +344,7 @@
                     html +=`</ul>`;
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
+                    $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('show')
                     toastr.success("", response.title)
                 }else{
