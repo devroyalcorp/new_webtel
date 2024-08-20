@@ -317,7 +317,9 @@
             success:function(response){
                 var data = response.data;
                 let html = '';
+                $('#modal_spinner').hide()
                 if (response.status == 202) {
+                    $('#modal_spinner').hide()
                     html += `<ul class="list-group">`;
                     data.emails.forEach((value,index)=>{
                         html += `<li class="list-group-item d-flex justify-content-between align-items-center">`
@@ -344,23 +346,22 @@
                     html +=`</ul>`;
                     $('#modal-body-email').html(html);
                     $('#modal_emails_title').text('Employee Emails')
-                    $('#modal_spinner').modal('hide')
                     $('#modal_emails').modal('show')
                     toastr.success("", response.title)
                 }else{
-                    $('#modal_spinner').modal('hide')
+                    $('#modal_spinner').hide()
                     $('#modal_emails').modal('hide')
                     toastr.info("Employee dont have emails !", "Warning!")
                 }
             },
             error:function(response){
                 // console.log(response.data)
-                $('#modal_spinner').modal('hide')
+                $('#modal_spinner').hide()
                 toastr.error(response.msg, response.title)
                 table.draw();
             },
             complete: function () {
-                $('#modal_spinner').modal('hide');
+                $('#modal_spinner').hide();
             }
         });
     }
