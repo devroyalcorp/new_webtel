@@ -94,7 +94,7 @@
 
                 <div class="carousel-container">
                     <div class="images-wrapper">
-                        <img src="{{ asset('img/dirgahayu-ri-2024.gif') }}" class="bg-img-right" alt="Royal Company">
+                        <img src="{{ asset('img/login-v1.gif') }}" class="bg-img-right" alt="Royal Company">
                     </div>
                     <div class="text-slider">
                         <img src="{{ asset('img/brand-all.png') }}" class="image img-1 show" alt="Royal Brands">
