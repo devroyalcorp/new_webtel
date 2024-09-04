@@ -37,7 +37,7 @@ class UserController extends Controller
                 if ($this->connection->auth()->attempt($ldapUser->getDn(), $data['password'])) {
 
                     $get_user = User::select('users.*','job_details.company_id','job_details.department_id')
-                    ->where('username', $ldapUser['samaccountname'])
+                    ->where('username', $ldapUser->samaccountname[0])
                     ->leftjoin('job_details', 'job_details.employee_id','=', 'users.employee_id')->first();
 
                     if($get_user){
