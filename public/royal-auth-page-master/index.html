@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Royal Corporation Authentication Page" name="description" />
+    <meta content="Royal Corporation" name="author" />
+    <title>Royal Authentication Page</title>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- Bootstrap Css -->
+    <link href="/assets/libs/bootstrap/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+
+    <!-- Slick -->
+    <link href="/assets/libs/slick/slick.css" rel="stylesheet" type="text/css">
+    <link href="/assets/libs/slick/slick-theme.css" rel="stylesheet" type="text/css">
+
+    <!-- Font awesome -->
+    <link href="/assets/libs/fontawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- App style -->
+    <link href="/assets/css/login.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="bg-body">
+    <div class=" main py-3 px-4 px-sm-5 ">
+        <div class="row mb-4 w-100 d-flex align-items-center justify-content-center mx-auto">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-2 text-center">
+                <div class="dropdown-center" data-bs-theme="dark">
+                    <button class="btn btn-secondary rounded-pill w-75 shadow shadow-md dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        All Site
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="https://portal.royalcorp.co.id">PORTAL APPS</a></li>
+                        <li><a class="dropdown-item active" href="https://ems.royalcorp.co.id/login"
+                                aria-current="true">EMS (Employee Management System)</a></li>
+                        <li><a class="dropdown-item" href="https://ats.royalcorp.co.id">ATS (Attendance Timesheet
+                                System)</a></li>
+                        <li><a class="dropdown-item" href="https://webtel.royalcorp.co.id">WEBTEL</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 min-vh-100">
+            <div class="col-lg-6 col-md-12 ps-5 left-content-wrapper d-none d-lg-block my-auto">
+                <div class="d-flex align-items-start flex-column left-content">
+                    <div class="mb-auto p-2">
+                        <img class="rounded-pill img-fluid img-company" src="/assets/images/logo-royalcorp.png"
+                            alt="Royal Company">
+                        <div class="mt-3">
+                            <h1 class="app-title">EMS (Employee Management System)</h1>
+                            <h3 class="app-subtitle">Royal Corporation</h3>
+                        </div>
+                    </div>
+                    <div class="p-2 d-grid">
+                        <b>Our Brands:</b>
+                        <img src="/assets/images/brand-all.png" class="img-fluid img-brand" alt="Royal Brands">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 my-auto right-content-wrapper">
+                <div class="d-flex align-items-center justify-content-md-center flex-column right-content">
+                    <div class="banner-wrapper my-4 shadow shadow-md d-none d-lg-block brand-slider">
+                        <img class="rounded mx-auto d-block img-fluid img-banner"
+                            src="/assets/images/slider/slide-company.jpg" alt="Royal Banner">
+                        <img class="rounded mx-auto d-block img-fluid img-banner"
+                            src="/assets/images/slider/i-royale.jpg" alt="Royal Banner">
+                    </div>
+                    <div class="alt-banner-wrapper d-lg-none d-block text-center mb-3">
+                        <img class="rounded-pill img-fluid img-company shadow shadow-md mb-2"
+                            src="/assets/images/logo-royalcorp.png" alt="Royal Company">
+                        <h5 class="text-capitalize">ROYAL CORPORATION</h5>
+                    </div>
+                    <div class="input-form w-100">
+                        <form class="row g-3 d-flex align-items-center justify-content-center needs-validation" novalidate autocomplete="off">
+                            <div class="col-xl-6 col-md-8">
+                                <div class="col-md-12 mb-2">
+                                    <label for="input-username" class="form-label">Username <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="input-username" class="form-control rounded-pill shadow"
+                                        placeholder="ex: john.doe" required>
+                                    <div class="invalid-feedback">
+                                        This field is required!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <label for="input-password" class="form-label">Password <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                            class="form-control input-password-addon rounded-pill shadow"
+                                            id="input-password" placeholder="Your password" aria-label="Your password"
+                                            aria-describedby="basic-addon2" required>
+                                        <div class="invalid-feedback">
+                                            This field is required!
+                                        </div>
+                                        <span class="input-group-text group-password bg-transparent border-0"
+                                            id="basic-addon2">
+                                            <i class="fa fa-eye-slash font-size-16" id="toggle-password"
+                                                onclick="showHidePassword('#input-password')"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12 text-center my-2">
+                                    <button type="submit" class="btn btn-primary w-50 rounded-pill shadow">Log in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 footer my-2">
+                <div class="text-center mb-sm-0 mb-3 text-dark">
+                    <span class="d-block ">
+                        HRMS EMS v1.3
+                    </span>
+                    <span class="d-block ">
+                        © 2024 Royal Corporation. All Right Reserved.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="footer mt-4">
+        <div class="position-relative">
+            <div class="position-absolute bottom-0 start-50 translate-middle-x w-100">
+                <div class="text-center mb-sm-0 mb-3 text-dark">
+                    <span class="d-block ">
+                        HRMS EMS v1.3
+                    </span>
+                    <span class="d-block ">
+                        © 2024 Royal Corporation. All Right Reserved.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <script src="/assets/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            });
+
+            $('.brand-slider').slick({
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: true,
+                dots: true,
+            });
+        });
+
+        function showHidePassword(targetId) {
+            const el = $('#toggle-password');
+            const inputTarget = $(targetId);
+
+            if ($(inputTarget).attr('type') === 'password') {
+                $(el).removeClass('fa-eye-slash').addClass('fa-eye');
+            } else {
+                $(el).removeClass('fa-eye').addClass('fa-eye-slash');
+            }
+
+            $(inputTarget).attr('type', $(inputTarget).is(':password') ? 'text' : 'password');
+        }
+    </script>
+</body>
+
+</html>
