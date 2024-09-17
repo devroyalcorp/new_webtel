@@ -47,9 +47,9 @@
 </head>
 <body class="bg-body">
     <div class=" main py-3 px-4 px-sm-5 ">
-        <div class="row mb-4 w-100 d-flex align-items-center justify-content-center mx-auto">
+        <div class="row w-100 d-flex align-items-center justify-content-center mx-auto">
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-2 text-center">
-                <div class="dropdown-center" data-bs-theme="dark">
+                <div class="dropdown-center" data-bs-theme="light">
                     <button class="btn btn-secondary rounded-pill w-75 shadow shadow-md dropdown-toggle" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         All Site
