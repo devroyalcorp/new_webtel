@@ -72,7 +72,7 @@
                         <a href="{{ route('webtel.index') }}"><img class="rounded-pill img-fluid img-company" src="{{asset('royal-auth-page-master/assets/images/logo-royalcorp.png')}}"
                             alt="Royal Company"></a>
                         <div class="mt-3">
-                            <h1 class="app-title">Webtel (Web Telecomunnication)</h1>
+                            <h1 class="app-title">WebTel (Web Telecommunication)</h1>
                             <h3 class="app-subtitle">Royal Corporation</h3>
                         </div>
                     </div>
