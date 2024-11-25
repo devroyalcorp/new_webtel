@@ -89,7 +89,7 @@
                         <img class="rounded mx-auto d-block img-fluid img-banner"
                             src="{{asset('royal-auth-page-master/assets/images/slider/slide-company.jpg')}}" alt="Royal Banner">
                         <img class="rounded mx-auto d-block img-fluid img-banner"
-                            src="{{asset('royal-auth-page-master/assets/images/slider/i-royale.jpg')}}" alt="Royal Banner">
+                            src="{{asset('royal-auth-page-master/assets/images/slider/i-royale-v2.jpg')}}" alt="Royal Banner">
                     </div>
                     <div class="alt-banner-wrapper d-lg-none d-block text-center mb-3">
                         <a href="{{ route('webtel.index') }}"><img class="rounded-pill img-fluid img-company shadow shadow-md mb-2"
