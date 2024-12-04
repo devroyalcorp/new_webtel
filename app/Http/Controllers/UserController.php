@@ -23,7 +23,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('admin.login-v2');
+        // return view('admin.login-v2');
+        return view('admin.login-nataru');
     }
 
     public function login(Request $request)
