@@ -51,9 +51,6 @@
             min-width: 100%;
             min-height: 100%;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
             z-index: -1;
         }
 
@@ -71,10 +68,10 @@
 <body class="bg-body">
     <div class="video-container">
         <video autoplay muted loop no-controls>
-            <source src="{{ url('royal-auth-page-master/assets/images/nataru.mp4') }}" type="video/mp4" />
+            <source src="{{ url('royal-auth-page-master/assets/images/nataru-v3.mp4') }}" type="video/mp4" />
         </video>
     </div>
-    <div class=" main py-3 px-4 px-sm-5 ">
+    <div class=" main py-3">
         <div class="row w-100 d-flex align-items-center justify-content-center mx-auto">
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-2 text-center">
                 <div class="dropdown-center" data-bs-theme="light">
@@ -127,7 +124,7 @@
                     <div class="input-form w-100">
                         <form class="row g-3 d-flex align-items-center justify-content-center" id="form_signin" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <div class="col-xl-6 col-md-8">
+                            <div class="col-xl-10 col-md-12">
                                 <div class="col-md-12 mb-2">
                                     <label for="input-username" class="form-label">Username <span
                                             class="text-danger">*</span></label>

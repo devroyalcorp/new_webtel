@@ -105,6 +105,20 @@ html {
     }
 }
 
+@media (max-width: 991px) {
+
+    .right-content {
+        margin: auto !important;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .right-content {
+        margin-left: 20rem !important;
+    }
+}
+
 @media (max-width: 425px) {
     .right-content {
         width: 100%;
