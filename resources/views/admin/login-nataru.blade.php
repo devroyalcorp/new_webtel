@@ -22,8 +22,8 @@
     <link href="{{asset('royal-auth-page-master/assets/libs/fontawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- App style -->
-    <link href="{{asset('royal-auth-page-master/assets/css/login.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('royal-auth-page-master/assets/css/newlogin.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('royal-auth-page-master/assets/css/login.css?v='.time()) }}" rel="stylesheet" type="text/css">
+    <link href="{{asset('royal-auth-page-master/assets/css/newlogin.css?v='.time()) }}" rel="stylesheet" type="text/css">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
   
