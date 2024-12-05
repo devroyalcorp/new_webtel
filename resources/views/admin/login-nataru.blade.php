@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Royal Corporation Authentication Page" name="description" />
     <meta content="Royal Corporation" name="author" />
-    <title>Royal Authentication Page</title>
+    <title>Login</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('royal-auth-page-master/assets/images/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('royal-auth-page-master/assets/images/favicon.ico')}}" type="image/x-icon">
