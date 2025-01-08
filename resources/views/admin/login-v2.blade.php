@@ -29,7 +29,7 @@
     <style>
         .bg-body {
             background-color: transparent !important;
-            background-image: url(royal-auth-page-master/assets/images/backgroundv2.jpeg);
+            background-image: url(royal-auth-page-master/assets/images/backgroundv3.jpg);
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
