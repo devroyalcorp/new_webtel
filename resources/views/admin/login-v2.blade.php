@@ -99,10 +99,10 @@
                     <div class="input-form w-100">
                         <form class="row g-3 d-flex align-items-center justify-content-center" id="form_signin" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <div class="col-xl-6 col-md-8 g-3 d-flex align-items-center justify-content-center">
-                                <a type="button" id="sign-button-keycloack" href="{{ route('login.keycloak') }}" class="btn btn-primary shadow align-items-center">Log in Use Keycloack</a>
-                            </div>
                             <div class="col-xl-6 col-md-8">
+                                <div class="col-md-12 mb-2 mt-2 g-3  d-flex align-items-center justify-content-center">
+                                    <a type="button" id="sign-button-keycloack" href="{{ route('login.keycloak') }}" class="btn btn-primary shadow align-items-center">Log in Use Keycloack</a>
+                                </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="input-username" class="form-label">Username <span
                                             class="text-danger">*</span></label>
