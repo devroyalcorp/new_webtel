@@ -50,4 +50,5 @@ Route::get('/login', [UserController::class, 'index'])->name('admin.login');
 Route::post('/login/checked', [UserController::class, 'login'])->name('admin.logincheck');
 Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
-
+Route::get('/login/keycloak', [UserController::class, 'redirectToKeycloak'])->name('login.keycloak');
+Route::get('/login/keycloak/callback', [UserController::class, 'handleKeycloakCallback'])->name('login.keyCloackCallback');

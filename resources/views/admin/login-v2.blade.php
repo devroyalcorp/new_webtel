@@ -99,6 +99,9 @@
                     <div class="input-form w-100">
                         <form class="row g-3 d-flex align-items-center justify-content-center" id="form_signin" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <div class="col-xl-6 col-md-8 g-3 d-flex align-items-center justify-content-center">
+                                <a type="button" id="sign-button-keycloack" href="{{ route('login.keycloak') }}" class="btn btn-primary shadow align-items-center">Log in Use Keycloack</a>
+                            </div>
                             <div class="col-xl-6 col-md-8">
                                 <div class="col-md-12 mb-2">
                                     <label for="input-username" class="form-label">Username <span
@@ -220,7 +223,26 @@
                 });
             });
 
+            // $('#sign-button-keycloack').on('click', function () {
+
+            //     let URL = `{{route('login.keycloak')}}`;
+
+            //     MyPopUpWin(URL, 500, 500);
+            // });
         });
+
+        function MyPopUpWin(url, width, height) {
+            var leftPosition, topPosition;
+            //Allow for borders.
+            leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+            //Allow for title and status bars.
+            topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+            //Open the window.
+            window.open(url, "Window2",
+            "status=no,height=" + height + ",width=" + width + ",resizable=yes,left="
+            + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY="
+            + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no");
+        }
     </script>
 </body>
 
