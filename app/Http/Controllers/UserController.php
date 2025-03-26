@@ -28,7 +28,7 @@ class UserController extends Controller
 
         $session_user = Session::get('user_session_details');
         if(!isset($session_user)){
-            return view('admin.login-v2');
+            return view('admin.login-left-content');
         }else{
             return redirect()->route('webtel.detail', ['id' => $session_user['company_id']]);
         }
