@@ -68,7 +68,7 @@
 <body class="bg-body">
     <div class="video-container">
         <video autoplay muted loop no-controls>
-            <source src="{{ url('royal-auth-page-master/assets/images/nataru-v3.mp4') }}" type="video/mp4" />
+            <source src="{{ url('royal-auth-page-master/assets/images/ramadhan.webm') }}" type="video/mp4" />
         </video>
     </div>
     <div class=" main py-3">
@@ -96,12 +96,12 @@
                     <div class="mb-auto p-2">
                         <a href="{{ route('webtel.index') }}"><img class="rounded-pill img-fluid img-company" src="{{asset('royal-auth-page-master/assets/images/logo-royalcorp.png')}}"
                             alt="Royal Company"></a>
-                        <div class="mt-3">
+                        <div class="mt-3 text-white">
                             <h1 class="app-title">WebTel (Web Telecommunication)</h1>
                             <h3 class="app-subtitle">Royal Corporation</h3>
                         </div>
                     </div>
-                    <div class="p-2 d-grid">
+                    <div class="p-2 d-grid text-white">
                         <b>Our Brands:</b>
                         <img src="{{asset('royal-auth-page-master/assets/images/brand-all.png')}}" class="img-fluid img-brand" alt="Royal Brands">
                     </div>
@@ -126,7 +126,7 @@
                             {{ csrf_field() }}
                             <div class="col-xl-10 col-md-12">
                                 <div class="col-md-12 mb-2">
-                                    <label for="input-username" class="form-label">Username <span
+                                    <label for="input-username" class="form-label text-white">Username <span
                                             class="text-danger">*</span></label>
                                     <input type="text" id="input-username" class="form-control rounded-pill shadow"
                                         placeholder="ex: john.doe" name="username" required>
@@ -136,7 +136,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                    <label for="input-password" class="form-label">Password <span
+                                    <label for="input-password" class="form-label text-white">Password <span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="password"
