@@ -129,34 +129,37 @@ class UserController extends Controller
 
     public function logout()
     {
-        // The Keycloak server's URL and realm you want to log out from
-        $keycloakUrl = env('KEYCLOAK_BASE_URL'); // Base URL for Keycloak
-        $realm = env('KEYCLOAK_REALM');  // The realm for your Keycloak configuration
+        // // The Keycloak server's URL and realm you want to log out from
+        // $keycloakUrl = env('KEYCLOAK_BASE_URL'); // Base URL for Keycloak
+        // $realm = env('KEYCLOAK_REALM');  // The realm for your Keycloak configuration
 
-        // The Keycloak client credentials (client ID and client secret)
-        $clientId = env('KEYCLOAK_CLIENT_ID');
-        $clientSecret = env('KEYCLOAK_CLIENT_SECRET');
+        // // The Keycloak client credentials (client ID and client secret)
+        // $clientId = env('KEYCLOAK_CLIENT_ID');
+        // $clientSecret = env('KEYCLOAK_CLIENT_SECRET');
 
-        // Get the access token from the session (assuming it's stored there)
-        $refresh_token = Session::get('keycloak_refresh_token'); // Adjust according to how you're storing it
+        // // Get the access token from the session (assuming it's stored there)
+        // $refresh_token = Session::get('keycloak_refresh_token'); // Adjust according to how you're storing it
 
-        // Send a POST request to Keycloak logout endpoint
-        $response = Http::asForm()->post("{$keycloakUrl}/realms/{$realm}/protocol/openid-connect/logout", [
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-            'refresh_token' => $refresh_token, // Use refresh token if available
-        ]);
+        // // Send a POST request to Keycloak logout endpoint
+        // $response = Http::asForm()->post("{$keycloakUrl}/realms/{$realm}/protocol/openid-connect/logout", [
+        //     'client_id' => $clientId,
+        //     'client_secret' => $clientSecret,
+        //     'refresh_token' => $refresh_token, // Use refresh token if available
+        // ]);
 
-        if ($response->successful()) {
-            // Clear Laravel session and logout
-            Session::flush(); // Remove all session data
+        // if ($response->successful()) {
+        //     // Clear Laravel session and logout
+        //     Session::flush(); // Remove all session data
     
-            // Optionally, you could redirect to a login page or home page here:
-            return redirect('/login')->with('message', 'You have been logged out.');
-        } else {
-            // Handle error in logout request
-            return redirect('/login')->with('message', 'Error Logout.');
-        }
+        //     // Optionally, you could redirect to a login page or home page here:
+        //     return redirect('/login')->with('message', 'You have been logged out.');
+        // } else {
+        //     // Handle error in logout request
+        //     return redirect('/login')->with('message', 'Error Logout.');
+        // }
+
+        Session::flush(); // Remove all session data
+        return redirect('/login')->with('message', 'You have been logged out.');
 
     }
 
