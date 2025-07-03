@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebmailController;
 use App\Http\Controllers\WebtelController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckUserSession;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,19 +32,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/webmail/get_employee_webmail/{id}', [WebmailController::class, 'get_employee_webmail'])->name('webmail.get_employee_webmail');
 // Route::post('/webmail/update_webmail', [WebmailController::class, 'update'])->name('webmail.update');
 
+Route::middleware(['web', CheckUserSession::class])->group(function () {
+    // webtel
+    Route::get('/', [WebtelController::class, 'index'])->name('webtel.index');
+    Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])->name('webtel.detail');
+    Route::get('/webtel/datatables/{id}', [WebtelController::class, 'datatables_webtel'])->name('webtel.datatables');
+    Route::get('/webtel/get_employee_webtel/{id}', [WebtelController::class, 'get_employee_webtel'])->name('webtel.get_employee_webtel');
+    Route::post('/webtel/update_webtel', [WebtelController::class, 'update'])->name('webtel.update');
+    Route::post('/webtel/set_primary_emails', [WebtelController::class, 'set_primary_emails'])->name('webtel.set_primary_emails');
+    Route::get('/webtel/showEmails/{id}', [WebtelController::class, 'showEmails'])->name('webtel.showEmails');
 
-// webtel
-Route::get('/', [WebtelController::class, 'index'])->name('webtel.index');
-Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])->name('webtel.detail');
-Route::get('/webtel/datatables/{id}', [WebtelController::class, 'datatables_webtel'])->name('webtel.datatables');
-Route::get('/webtel/get_employee_webtel/{id}', [WebtelController::class, 'get_employee_webtel'])->name('webtel.get_employee_webtel');
-Route::post('/webtel/update_webtel', [WebtelController::class, 'update'])->name('webtel.update');
-Route::post('/webtel/set_primary_emails', [WebtelController::class, 'set_primary_emails'])->name('webtel.set_primary_emails');
-Route::get('/webtel/showEmails/{id}', [WebtelController::class, 'showEmails'])->name('webtel.showEmails');
-
-// for log
-Route::get('/webtel/datatables_loghistory/{id}', [LoghistoriesController::class, 'datatables_loghistory'])->name('webtel.datatables_loghistory');
-Route::get('/webtel/check_history/{id}', [LoghistoriesController::class, 'check_history'])->name('webtel.check_history');
+    // for log
+    Route::get('/webtel/datatables_loghistory/{id}', [LoghistoriesController::class, 'datatables_loghistory'])->name('webtel.datatables_loghistory');
+    Route::get('/webtel/check_history/{id}', [LoghistoriesController::class, 'check_history'])->name('webtel.check_history');
+});
 
 //for admin
 Route::get('/login', [UserController::class, 'index'])->name('admin.login');

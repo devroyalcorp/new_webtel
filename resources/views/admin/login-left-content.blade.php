@@ -78,12 +78,12 @@
 <body class="bg-body">
     <div class="video-container d-none d-md-block">
         <video autoplay muted loop no-controls>
-            <source src="{{ url('royal-auth-page-master/assets/images/iduladha.webm') }}" type="video/mp4" />
+            <source src="{{ url('royal-auth-page-master/assets/images/login-v2.webm') }}" type="video/mp4" />
         </video>
     </div>
     <div class="video-container d-block d-md-none">
         <video autoplay muted loop no-controls>
-            <source src="{{ url('royal-auth-page-master/assets/images/iduladha-mobile.webm') }}" type="video/mp4" />
+            <source src="{{ url('royal-auth-page-master/assets/images/login-v2-mobile.webm') }}" type="video/mp4" />
         </video>
     </div>
     <div class="main py-3">
