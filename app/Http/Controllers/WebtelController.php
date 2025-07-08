@@ -26,17 +26,24 @@ class WebtelController extends Controller
             $where = [
                 ['job_details.extention_number', '!=', null]
             ];
-        }else{
-            if($this->checkExistedSession('user_session_details') == true){
-
-                $userDetails = Session::get('user_session_details');
-                if($userDetails['username'] != "admin.it"){
-                    $where = [
-                        ['job_details.department_id', $userDetails['department_id']]
-                    ];
-                }
-            }
         }
+
+        // if($this->checkExistedSession('login_status') == false){
+        //     $where = [
+        //         ['job_details.extention_number', '!=', null]
+        //     ];
+        // }else{
+        //     if($this->checkExistedSession('user_session_details') == true){
+
+        //         $userDetails = Session::get('user_session_details');
+        //         if($userDetails['username'] != "admin.it"){
+        //             $where = [
+        //                 ['job_details.department_id', $userDetails['department_id']]
+        //             ];
+        //         }
+        //     }
+        // }
+
         if(isset($userDetails) && ($userDetails['username'] != "admin.it" && $userDetails['username'] != "reynold")){
             $data_companies= JobDetails::select('job_details.id', 'job_details.employee_id', 'job_details.work_email','job_details.line_number','job_details.extention_number','employees.first_name','employees.last_name','departments.name','companies.acronym')
             ->leftJoin('employees', 'employees.id', '=', 'job_details.employee_id')
@@ -95,6 +102,14 @@ class WebtelController extends Controller
         ->addColumn('full_name', function($data_companies) {
             $full_name = ($data_companies['first_name'] ?? "")." ".($data_companies['last_name'] ?? "");
             return $full_name;
+        })
+        ->addColumn('user_session_detail', function($data_companies) {
+            if($this->checkExistedSession('user_session_details') == true){
+                $userDetails = Session::get('user_session_details');
+                return $userDetails;
+            }else{
+                return null;
+            }
         })
         ->make(true);
     }
@@ -189,23 +204,33 @@ class WebtelController extends Controller
     }
 
     public function showEmails($employee_id){
-            $employeeEmails = EmployeeMails::where('employee_id',$employee_id)->first();
+        $employeeEmails = EmployeeMails::where('employee_id',$employee_id)->first();
 
-            if($employeeEmails){
-                $employeeEmails = $employeeEmails->toArray();
-                $dataEmails = [];
-                foreach($employeeEmails as $key=>$val){
-                    if(str_contains($key,"email")){
-                        if(isset($val)){
-                            $dataEmails['emails'][]=$val;
-                        }
+        if($employeeEmails){
+            $employeeEmails = $employeeEmails->toArray();
+            $dataEmails = [];
+            foreach($employeeEmails as $key=>$val){
+                if(str_contains($key,"email")){
+                    if(isset($val)){
+                        $dataEmails['emails'][]=$val;
                     }
                 }
-                $dataEmails['employee_id'] = $employee_id;
-                return response()->json(['status' => 202, 'msg' => "Employee have emails !", 'title' => 'Success!', 'type' => 'success', 'data' => $dataEmails]);
-            }else{
-                return response()->json(['status' => 500, 'msg' => "Employee dont have emails!", 'title' => 'Failed!', 'type' => 'warning']);
             }
+            $dataEmails['employee_id'] = $employee_id;
+            $dataEmails['can_set_email'] = false;
+
+            if($this->checkExistedSession('user_session_details') == true){
+                $userDetails = Session::get('user_session_details');
+                
+                if(Session::get('user_session_details')['username'] == 'admin.it'){
+                    $dataEmails['can_set_email'] = true;
+                }
+            }
+
+            return response()->json(['status' => 202, 'msg' => "Employee have emails !", 'title' => 'Success!', 'type' => 'success', 'data' => $dataEmails]);
+        }else{
+            return response()->json(['status' => 500, 'msg' => "Employee dont have emails!", 'title' => 'Failed!', 'type' => 'warning']);
+        }
     }
 
     public function set_primary_emails(Request $request){

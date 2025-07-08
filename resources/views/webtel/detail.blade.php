@@ -219,14 +219,18 @@
                 {
                     data: 'employee_id',
                     render: function (data, type, row) {
-                        return `<div class="btn-group" role="group" aria-label="action">
-                                    <span class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
-                                        <i class="fas fa-pen icon_plus"></i>
-                                    </span>
-                                    <span class="text-secondary" style="margin-top: 0.4rem !important;" role="button" onclick="ReadLogHistory(${row.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
-                                        <i class="fas fa-history icon_plus"></i>
-                                    </span>
-                                </div>`;
+                        if(row.user_session_detail.username == 'admin.it'){
+                            return `<div class="btn-group" role="group" aria-label="action">
+                                        <span class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
+                                            <i class="fas fa-pen icon_plus"></i>
+                                        </span>
+                                        <span class="text-secondary" style="margin-top: 0.4rem !important;" role="button" onclick="ReadLogHistory(${row.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
+                                            <i class="fas fa-history icon_plus"></i>
+                                        </span>
+                                    </div>`;
+                        }
+
+                        return '-';
                     }
                 },
                 @endif
@@ -328,11 +332,14 @@
                             html += `<i class="fas fa-star icon_plus"></i>`
                             html += `<div class="btn-group" role="group" aria-label="action">`
                         }else{
-                            html += `<div class="btn-group" role="group" aria-label="action">
-                            <button type="button" class="btn ms-3 text-primary" style="border:1px solid blue;" title="Set Primary Email" id="button_set" data-email="${value}" data-id="${data.employee_id}" ">
-                                    Set Primary
-                            </button>`
+                            if(data.can_set_email == true){
+                                html += `<div class="btn-group" role="group" aria-label="action">
+                                <button type="button" class="btn ms-3 text-primary" style="border:1px solid blue;" title="Set Primary Email" id="button_set" data-email="${value}" data-id="${data.employee_id}" ">
+                                        Set Primary
+                                </button>`
+                            }
                         }
+                        
                         html += `
                                 <div class="tltp">
                                     <span class="tltptext" id="mytltp_${data.employee_id}_${index}">Copy email to clipboard</span>
@@ -381,7 +388,7 @@
     });
 
     function setEmails(email, employee_id){
-        console.log(email, employee_id)
+
         $.ajax({
             headers: {
                 "X-CSRF-TOKEN": "{{ csrf_token() }}",
@@ -456,7 +463,7 @@
 
         var input = document.getElementById("inputer_"+id);
         input.value;
-        console.log(input.value);
+
         input.disabled = false;
         input.select();
         document.execCommand("Copy");

@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse navbar-check" id="navbarTogglerDemo01" style="padding: 0 20px; color: #32294B;">
-            @if(Session::get('login_status') == true && (Session::get('user_session_details')['username'] !== 'admin.it' && Session::get('user_session_details')['username'] !== 'reynold'))
+            {{-- @if(Session::get('login_status') == true && (Session::get('user_session_details')['username'] !== 'admin.it' && Session::get('user_session_details')['username'] !== 'reynold'))
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top logo-img-header">
                 </a>
@@ -16,7 +16,7 @@
                         <a class="navbar-brand text-muted" style="font-size:15px;" href="#"><br><small style="padding-left: 0.8rem !important;">version 2.0</small></a>
                     </figcaption>
                 </figure>
-            @else
+            @else --}}
                 <a class="navbar-brand" href="{{route('webtel.index')}}">
                     <img src="{{ asset('img/logo-royalcorp.png')}}" alt="" width="60" height="60" class="d-inline-block align-text-top logo-img-header">
                 </a>
@@ -28,7 +28,7 @@
                         <a class="navbar-brand text-muted" style="font-size:15px;" href="{{route('webtel.index')}}"><br><small style="padding-left: 0.8rem !important;">version 2.0</small></a>
                     </figcaption>
                   </figure>
-            @endif
+            {{-- @endif --}}
             <ul class="navbar-nav" style="border-left: 2px solid #32294B; margin-left: auto; padding-left: 5px;">
                 <li class="nav-item pr-5">
                     @if(!Session::get('login_status'))

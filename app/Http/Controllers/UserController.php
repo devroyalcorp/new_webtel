@@ -30,7 +30,8 @@ class UserController extends Controller
         if(!isset($session_user)){
             return view('admin.login-left-content');
         }else{
-            return redirect()->route('webtel.detail', ['id' => $session_user['company_id']]);
+            // return redirect()->route('webtel.detail', ['id' => $session_user['company_id']]);
+            return redirect()->route('webtel.index');
         }
         // return view('admin.login-nataru');
     }
@@ -187,7 +188,9 @@ class UserController extends Controller
                 Session::put('login_status', true);
                 Session::forget('name_company');
 
-                return redirect()->route('webtel.detail', ['id' => $get_user['company_id']]);
+                // return redirect()->route('webtel.detail', ['id' => $get_user['company_id']]);
+                return redirect()->route('webtel.index');
+                
             }else{
                 return redirect()->back();
             }
