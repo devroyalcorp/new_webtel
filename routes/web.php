@@ -32,7 +32,7 @@ use App\Http\Middleware\CheckUserSession;
 // Route::get('/webmail/get_employee_webmail/{id}', [WebmailController::class, 'get_employee_webmail'])->name('webmail.get_employee_webmail');
 // Route::post('/webmail/update_webmail', [WebmailController::class, 'update'])->name('webmail.update');
 
-Route::middleware(['web', CheckUserSession::class])->group(function () {
+// Route::group(function () {
     // webtel
     Route::get('/', [WebtelController::class, 'index'])->name('webtel.index');
     Route::get('/webtel/companies/{id}', [WebtelController::class, 'detail_webtel'])->name('webtel.detail');
@@ -45,7 +45,7 @@ Route::middleware(['web', CheckUserSession::class])->group(function () {
     // for log
     Route::get('/webtel/datatables_loghistory/{id}', [LoghistoriesController::class, 'datatables_loghistory'])->name('webtel.datatables_loghistory');
     Route::get('/webtel/check_history/{id}', [LoghistoriesController::class, 'check_history'])->name('webtel.check_history');
-});
+// });
 
 //for admin
 Route::get('/login', [UserController::class, 'index'])->name('admin.login');

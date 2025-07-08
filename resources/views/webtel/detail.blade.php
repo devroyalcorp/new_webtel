@@ -19,8 +19,8 @@
                             <th scope="col">Full Name</th>
                             <th scope="col">Department</th>
                             <th scope="col">Extension</th>
-                            <th scope="col">Email</th>
                             @if(Session::get('login_status'))
+                                <th scope="col">Email</th>
                                 <th scope="col">Action</th>
                             @endif
                         </tr>
@@ -205,6 +205,7 @@
                 { 
                     data: 'full_extention_number',
                 },
+                @if(Session::get('login_status'))
                 { 
                     data: 'employee_id',
                     render: function ( data, type, row ) {
@@ -215,11 +216,11 @@
                                 </div>`;
                     }
                 },
-                @if(Session::get('login_status'))
                 {
                     data: 'employee_id',
                     render: function (data, type, row) {
-                        if(row.user_session_detail.username == 'admin.it'){
+
+                        if(row.username == 'admin.it'){
                             return `<div class="btn-group" role="group" aria-label="action">
                                         <span class="text-secondary me-2" style="margin-top: 0.4rem !important;" role="button" onclick="UpdateEmployee(${data})" data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                                             <i class="fas fa-pen icon_plus"></i>
@@ -339,7 +340,7 @@
                                 </button>`
                             }
                         }
-                        
+
                         html += `
                                 <div class="tltp">
                                     <span class="tltptext" id="mytltp_${data.employee_id}_${index}">Copy email to clipboard</span>

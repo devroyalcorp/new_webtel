@@ -103,9 +103,9 @@ class WebtelController extends Controller
             $full_name = ($data_companies['first_name'] ?? "")." ".($data_companies['last_name'] ?? "");
             return $full_name;
         })
-        ->addColumn('user_session_detail', function($data_companies) {
+        ->addColumn('username', function($data_companies) {
             if($this->checkExistedSession('user_session_details') == true){
-                $userDetails = Session::get('user_session_details');
+                $userDetails = Session::get('user_session_details')['username'];
                 return $userDetails;
             }else{
                 return null;
