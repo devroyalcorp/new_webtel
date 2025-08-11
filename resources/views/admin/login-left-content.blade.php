@@ -91,7 +91,7 @@
         <div class="row w-100 d-flex align-items-center justify-content-center mx-auto mb-3">
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-2 text-center">
                 <div class="dropdown-center" data-bs-theme="light">
-                    <button class="btn btn-secondary rounded-pill w-75 shadow shadow-md dropdown-toggle" type="button"
+                    <button class="btn btn-danger rounded-pill w-75 shadow shadow-md dropdown-toggle" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         All Site
                     </button>
